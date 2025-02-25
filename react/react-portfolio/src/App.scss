@@ -11,12 +11,13 @@
   }
 }
 
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
 body {
   color: var(--foreground);
   background: var(--background);
   margin: 0; 
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  div {
-    color: red;
-  }
 }
