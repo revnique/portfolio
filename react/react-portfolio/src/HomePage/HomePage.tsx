@@ -1,4 +1,5 @@
 import './HomePage.scss'
+import { Link, Outlet } from 'react-router';
 
 export function HomePage() {
   return <div className="home-page-container">
@@ -18,14 +19,13 @@ export function HomePage() {
     <div className="content">
         <div className="side-bar">
             <div>side nav</div>
+            <ul>
+                <li><Link to="/bucklite">BuckLite</Link></li>
+                <li><Link to="/components">Components</Link></li>
+            </ul>   
         </div>
         <div className="main-content">
-            <div className="main-content-header">
-                <div>main content header</div>
-            </div>
-            <div className="main-content-body">
-                <div>main content body</div>
-            </div>
+            <Outlet />
         </div>
     </div>
   </div>;

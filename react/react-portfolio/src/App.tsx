@@ -1,10 +1,17 @@
 import './App.scss'
-import { BrowserRouter } from 'react-router'
+import { BrowserRouter, Route, Routes } from 'react-router'
 import { HomePage } from './HomePage/HomePage'
+import BuckLite from './BuckLite/BuckLite'
+import ComponentsPage from './ComponentsPage/ComponentsPage'
 function App() {
   return (
     <BrowserRouter>
-    <HomePage />
+    <Routes>
+      <Route path="/" element={<HomePage />}>
+        <Route path="/bucklite" element={<BuckLite />} />
+        <Route path="/components" element={<ComponentsPage />} />
+      </Route>
+    </Routes>
     </BrowserRouter>
   )
 }
