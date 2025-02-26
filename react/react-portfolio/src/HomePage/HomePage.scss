@@ -2,14 +2,12 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: red;
     .header {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         .header-left {
             text-align: center;
-            background-color: steelblue;
             width: 100%;
         }
         .header-right {
@@ -17,7 +15,6 @@
             flex-direction: row;
             justify-content: space-between;
             width: 120px;
-            background-color: green;
             :hover {
                 cursor: pointer;
                 background-color: #efefef !important;
@@ -28,7 +25,6 @@
                 align-items: center;
                 justify-content: center;
                 padding: 5px;
-                background-color: yellow;
                 width: 100%;
                 .logo {
                     height: 50px;
@@ -36,31 +32,72 @@
                 }
             }
         }
+        .side-bar-toggle {
+            display: none;
+        }
     }
     .content {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        background-color: purple;
         height: 100%;
         .side-bar {
-            background-color: orange;
             width: 300px;
+            font-size: 1.5rem;
+            background-color: #333;
+            .side-bar-header {
+                text-align: center;
+                padding: 10px;
+                height: 40px;
+                .fa-icon {
+                    visibility: hidden;
+                    position: absolute;
+                    right: 10px;
+                }
+            }
+            ul {
+                border-top: 1px solid #555;
+                border-bottom: 1px solid #555;
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+                :hover {
+                    background-color: #444;
+                    cursor: pointer;
+                }
+                .selected {
+                    background-color: #444;
+                }
+                li {
+                    width: 100%;
+                    a {
+                        text-decoration: none;
+                        color: #fff;
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+                        padding: 15px 10px 15px 10px;
+                        .fa-icon {
+                            width: 20px;
+                            margin-right: 10px;
+                        }
+                    }
+                }
+            }
         }
         .main-content {
-            background-color: blue;
+            background-color: #444;
             width: 100%;
             height: 100%;
             .main-content-header {
-                background-color: green;
                 width: 100%;
             }
             .main-content-body {
-                background-color: pink;
                 width: 100%;
             }
         }
     }
+
     @media (max-width: 768px) {
         .header {
             h1{
@@ -77,13 +114,16 @@
                     align-items: center;
                     justify-content: center;
                     padding: 2px;
-                    background-color: yellow;
                     width: 100%;
                     .logo {
                         height: 20px;
                         width: 20px;
                     }
                 }
+            }
+            .side-bar-toggle {
+                padding: 10px;
+                display: block;
             }
         }
         .content {
@@ -94,6 +134,18 @@
                 top: 41px;
                 left: 0;
                 z-index: 10;
+                transition: margin-left 0.3s ease-in-out;
+                &.open {
+                    margin-left: 0;
+                }
+                &.closed {
+                    margin-left: -300px;
+                }
+                .side-bar-header {
+                    .fa-icon {
+                        visibility: visible;
+                    }
+                }
             }
             .main-content {
                 width: 100%;

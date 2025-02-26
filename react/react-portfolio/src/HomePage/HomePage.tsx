@@ -1,9 +1,19 @@
 import './HomePage.scss'
-import { Link, Outlet } from 'react-router';
+import { NavLink, Outlet } from 'react-router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMoneyBill, faCode, faClose, faBars } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { useState } from 'react';
 
+library.add(faMoneyBill, faCode, faClose, faBars);
 export function HomePage() {
+    const [sideBarOpen, setSideBarOpen] = useState(false);
+    const toggleSideBar = () => {
+        setSideBarOpen(!sideBarOpen);
+    }
   return <div className="home-page-container">
     <div className="header">
+        <div className="side-bar-toggle" onClick={toggleSideBar}><FontAwesomeIcon className="fa-icon" icon="bars" /></div>
         <div className="header-left">
             <h1>Revnique's React Portfolio</h1>
         </div>
@@ -17,11 +27,11 @@ export function HomePage() {
         </div>
     </div>
     <div className="content">
-        <div className="side-bar">
-            <div>side nav</div>
+        <div className={`side-bar ${sideBarOpen ? 'open' : 'closed'}`}>
+            <div className="side-bar-header">Projects<FontAwesomeIcon className="fa-icon" icon="close" onClick={toggleSideBar} /></div>
             <ul>
-                <li><Link to="/bucklite">BuckLite</Link></li>
-                <li><Link to="/components">Components</Link></li>
+                <li><NavLink to="/bucklite" className={({ isActive }) => isActive ? 'selected' : ''}><FontAwesomeIcon className="fa-icon" icon="money-bill" /> BuckLite</NavLink></li>
+                <li><NavLink to="/components" className={({ isActive }) => isActive ? 'selected' : ''}><FontAwesomeIcon className="fa-icon" icon="code" /> Components</NavLink></li>
             </ul>   
         </div>
         <div className="main-content">
