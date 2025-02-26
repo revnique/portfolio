@@ -17,7 +17,10 @@
             width: 120px;
             :hover {
                 cursor: pointer;
-                background-color: #efefef !important;
+                background-color: #444 !important;
+            }
+            .selected {
+                background-color: #444 !important;
             }
             .logo-container {
                 display: flex;
@@ -46,6 +49,8 @@
             font-size: 1.5rem;
             background-color: #333;
             .side-bar-header {
+                background-color: rgb(92 107 192);
+                color: #fff;
                 text-align: center;
                 padding: 10px;
                 height: 40px;
@@ -94,6 +99,13 @@
             }
             .main-content-body {
                 width: 100%;
+            }
+            .summary {
+                text-align: center;
+                padding: 25px;
+            }
+            .content-container {
+                padding: 25px;
             }
         }
     }
@@ -153,3 +165,6 @@
         }
     }
 }
+
+// rgb(92 107 192); //purple
+// rgb(105 245 171); //green

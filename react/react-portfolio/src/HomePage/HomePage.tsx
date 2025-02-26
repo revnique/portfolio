@@ -11,32 +11,32 @@ export function HomePage() {
     const toggleSideBar = () => {
         setSideBarOpen(!sideBarOpen);
     }
-  return <div className="home-page-container">
-    <div className="header">
-        <div className="side-bar-toggle" onClick={toggleSideBar}><FontAwesomeIcon className="fa-icon" icon="bars" /></div>
-        <div className="header-left">
-            <h1>Revnique's React Portfolio</h1>
-        </div>
-        <div className="header-right">
-            <div className="logo-container">
-                <img className="logo" src="/react-logo.png" alt="Revnique's React Portfolio" />
+    return <div className="home-page-container">
+        <div className="header">
+            <div className="side-bar-toggle" onClick={toggleSideBar}><FontAwesomeIcon className="fa-icon" icon="bars" /></div>
+            <div className="header-left">
+                <h1>Revnique's React Portfolio</h1>
             </div>
-            <div className="logo-container">
-                <img className="logo" src="/angular-logo.png" alt="Revnique's Angular Portfolio" />
+            <div className="header-right">
+                <div className="logo-container selected">
+                    <img className="logo" src="/react-logo.png" alt="Revnique's React Portfolio" />
+                </div>
+                <div className="logo-container">
+                    <img className="logo" src="/angular-logo.png" alt="Revnique's Angular Portfolio" />
+                </div>
             </div>
         </div>
-    </div>
-    <div className="content">
-        <div className={`side-bar ${sideBarOpen ? 'open' : 'closed'}`}>
-            <div className="side-bar-header">Projects<FontAwesomeIcon className="fa-icon" icon="close" onClick={toggleSideBar} /></div>
-            <ul>
-                <li><NavLink to="/bucklite" className={({ isActive }) => isActive ? 'selected' : ''}><FontAwesomeIcon className="fa-icon" icon="money-bill" /> BuckLite</NavLink></li>
-                <li><NavLink to="/components" className={({ isActive }) => isActive ? 'selected' : ''}><FontAwesomeIcon className="fa-icon" icon="code" /> Components</NavLink></li>
-            </ul>   
+        <div className="content">
+            <div className={`side-bar ${sideBarOpen ? 'open' : 'closed'}`}>
+                <div className="side-bar-header">Projects<FontAwesomeIcon className="fa-icon" icon="close" onClick={toggleSideBar} /></div>
+                <ul>
+                    <li><NavLink to="/bucklite" className={({ isActive }) => isActive ? 'selected' : ''}><FontAwesomeIcon className="fa-icon" icon="money-bill" /> BuckLite</NavLink></li>
+                    <li><NavLink to="/components" className={({ isActive }) => isActive ? 'selected' : ''}><FontAwesomeIcon className="fa-icon" icon="code" /> Components</NavLink></li>
+                </ul>
+            </div>
+            <div className="main-content">
+                <Outlet />
+            </div>
         </div>
-        <div className="main-content">
-            <Outlet />
-        </div>
-    </div>
-  </div>;
+    </div>;
 }
