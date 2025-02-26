@@ -12,7 +12,12 @@ export function HomePage() {
         setSideBarOpen(!sideBarOpen);
     }
     const gotToAngular = () => {
-        window.location.href = 'http://localhost:5177';
+        const page = window.location.href.split('/')[3];
+        if (page === 'bucklite') {
+          window.location.href = 'http://localhost:5177/bucklite';
+        } else if (page === 'components') {
+          window.location.href = 'http://localhost:5177/components';
+        }
     }
     return <div className="home-page-container">
         <div className="header">

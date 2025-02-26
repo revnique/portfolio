@@ -100,11 +100,11 @@
             .main-content-body {
                 width: 100%;
             }
-            .summary {
+            ::ng-deep .summary {
                 text-align: center;
                 padding: 25px;
             }
-            .content-container {
+            ::ng-deep .content-container {
                 padding: 25px;
             }
         }

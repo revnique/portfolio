@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -8,7 +8,7 @@ import { faBars, faClose, faCode, faMoneyBill } from '@fortawesome/free-solid-sv
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FontAwesomeModule, CommonModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, FontAwesomeModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -26,6 +26,11 @@ export class AppComponent {
   }
 
   gotoReact() {
-    window.location.href = 'http://localhost:5173';
+    const page = window.location.href.split('/')[3];
+    if (page === 'bucklite') {
+      window.location.href = 'http://localhost:5173/bucklite';
+    } else if (page === 'components') {
+      window.location.href = 'http://localhost:5173/components';
+    }
   }
 }
