@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+    --background: #ffffff;
+    --foreground: #171717;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #333;
+      --foreground: #ededed;
+    }
+  }
+  
+  html, body, #root {
+    height: 100%;
+    width: 100%;
+  }
+  body {
+    color: var(--foreground);
+    background: var(--background);
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+  

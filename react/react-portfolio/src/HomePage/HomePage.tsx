@@ -11,6 +11,9 @@ export function HomePage() {
     const toggleSideBar = () => {
         setSideBarOpen(!sideBarOpen);
     }
+    const gotToAngular = () => {
+        window.location.href = 'http://localhost:5177';
+    }
     return <div className="home-page-container">
         <div className="header">
             <div className="side-bar-toggle" onClick={toggleSideBar}><FontAwesomeIcon className="fa-icon" icon="bars" /></div>
@@ -22,7 +25,7 @@ export function HomePage() {
                     <img className="logo" src="/react-logo.png" alt="Revnique's React Portfolio" />
                 </div>
                 <div className="logo-container">
-                    <img className="logo" src="/angular-logo.png" alt="Revnique's Angular Portfolio" />
+                    <img className="logo" src="/angular-logo.png" alt="Revnique's Angular Portfolio" onClick={gotToAngular} />
                 </div>
             </div>
         </div>
