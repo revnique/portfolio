@@ -6,6 +6,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        background-color: #eee;
         .header-left {
             text-align: center;
             width: 100%;
@@ -17,10 +18,10 @@
             width: 120px;
             :hover {
                 cursor: pointer;
-                background-color: #444 !important;
+                background-color: #fff !important;
             }
             .selected {
-                background-color: #444 !important;
+                background-color: #fff !important;
             }
             .logo-container {
                 display: flex;
@@ -47,7 +48,7 @@
         .side-bar {
             width: 300px;
             font-size: 1.5rem;
-            background-color: #333;
+            background-color: #eee;
             .side-bar-header {
                 background-color: rgb(92 107 192);
                 color: #fff;
@@ -67,31 +68,30 @@
                 padding: 0;
                 margin: 0;
                 :hover {
-                    background-color: #444;
+                    background-color: #fff;
                     cursor: pointer;
                 }
                 .selected {
-                    background-color: #444;
+                    background-color: #fff;
                 }
                 li {
                     width: 100%;
                     a {
                         text-decoration: none;
-                        color: #fff;
+                        color: #111;
                         width: 100%;
                         height: 100%;
                         display: block;
                         padding: 15px 10px 15px 10px;
                         .fa-icon {
                             margin-right: 10px;
-                            display: inline-block !important;
                         }
                     }
                 }
             }
         }
         .main-content {
-            background-color: #444;
+            background-color: #fff;
             width: 100%;
             height: 100%;
             .main-content-header {
@@ -161,6 +161,43 @@
             }
             .main-content {
                 width: 100%;
+            }
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .header {
+            .header-right {
+                :hover {
+                    cursor: pointer;
+                    background-color: #444 !important;
+                }
+                .selected {
+                    background-color: #444 !important;
+                }
+            }
+        }
+        .content {
+            .side-bar {
+                background-color: #333 !important;
+                ul {
+                    border-top: 1px solid #555;
+                    border-bottom: 1px solid #555;
+                    :hover {
+                        background-color: #444;
+                    }
+                    .selected {
+                        background-color: #444;
+                    }
+                    li {
+                        a {
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+            .main-content {
+                background-color: #444;
             }
         }
     }
