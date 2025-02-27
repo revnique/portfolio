@@ -18,11 +18,14 @@ export default function BuckLite() {
             </div>
             <div className="main-content-body">
                 <div className="content-container">
-                    <div>BuckLite content</div>
+                    <h1>BuckLite content</h1>
                     <form>
                         <div className="form-group">
-                            <label htmlFor="">Value Bar Positive Height</label>
-                            <input type="number" id="valueBarPositiveHeight" value={valueBarPositiveHeight} onChange={(e) => updateValueBarPositiveHeight(+e.target.value)} />
+                            <div>
+                                <label htmlFor="value0" onClick={() => updateValueBarPositiveHeight(0)}>0</label>
+                                <input type="range" id="value0" min="0" max="100" value={valueBarPositiveHeight} onChange={(e) => updateValueBarPositiveHeight(+e.target.value)} />
+                                <label htmlFor="value100" onClick={() => updateValueBarPositiveHeight(100)}>100</label>
+                            </div>
                         </div>
                         
                     </form>
