@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoneyBill, faCode, faClose, faBars } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { useState } from 'react';
-
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 library.add(faMoneyBill, faCode, faClose, faBars);
+
 export function HomePage() {
+    const queryClient = new QueryClient();
     const [sideBarOpen, setSideBarOpen] = useState(false);
     const toggleSideBar = () => {
         setSideBarOpen(!sideBarOpen);
@@ -43,7 +45,9 @@ export function HomePage() {
                 </ul>
             </div>
             <div className="main-content">
-                <Outlet />
+                <QueryClientProvider client={queryClient}>
+                    <Outlet />
+                </QueryClientProvider>
             </div>
         </div>
     </div>;
