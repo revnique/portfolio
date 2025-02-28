@@ -165,6 +165,9 @@
             }
             .main-content {
                 width: 100%;
+                ::ng-deep .content-container {
+                    flex-direction: column;
+                }
             }
         }
     }
