@@ -20,8 +20,127 @@
 }
 
 .form-container {
-    width: 250px;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    background-color: #efefef;
+    padding: 25px 5px 25px 25px;
+    .form-group {
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    input {
+        width: 200px;
+        font-size: 16px;
+    }
+    .button-container {
+        width: 220px;
+    }
+}
+.buck-input-container {
+    margin: 0 25px;
+}
+
+.buck-list-container {
+    width: 300px;
+    margin: 0 25px;
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+
+        tr{
+            height: 30px;
+        }
+        
+        tr:hover td{
+            background-color: #efefef;
+        }
+
+        tr.selected td {
+            background-color: #efefef;
+        }
+        .mat-icon {
+            padding: 0px;
+            margin: 0px;
+        }
+        .skeleton-loader {
+            background-color: #ddd;
+        }
+
+        td {
+            cursor: pointer;
+            border: none;
+            vertical-align: top;
+            padding: 0;
+            margin: 0;
+            height: 30px;
+            label {
+                width: 100%;
+                height: 100%;
+                display: block;
+                padding: 10px 0px 0px 5px;
+                margin: 0px;
+                cursor: pointer;
+            }
+        }
+
+        th {
+            padding: 0px 10px 10px 10px;
+            border-bottom: 1px solid #aaa;
+            margin: 0;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: left;
+        }
+        th:first-child {
+            padding-left: 0px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            label {
+                margin-top: 10px;
+                padding: 10px 0px 0px 5px;
+            }
+        }
+        button.delete-icon {
+            padding: 12px 0px 0px 5px;
+            color: #000;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+    }
+    .hidden {
+       opacity: 0;
+       width: 0;
+       height: 0;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .form-container {
+        background-color: #333;
+    }
+    .buck-list-container {
+        table {
+            tr:hover td{
+                background-color: #333;
+            }
+
+            tr.selected td {
+                background-color: #333;
+            }
+            .delete-icon {
+                color: #fff;
+            }
+        }
+    }
 }

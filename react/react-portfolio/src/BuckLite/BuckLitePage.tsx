@@ -7,11 +7,14 @@ import { BuckLite, Match } from './buck-helper';
 import { useEffect } from 'react';
 import { Amplify } from 'aws-amplify';  
 import { generateClient } from "aws-amplify/api";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faCheckSquare, faSquare } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+library.add(faTrash, faCheckSquare, faSquare);
 
 // @ts-ignore
 import config from '../aws-exports';
 Amplify.configure(config as any);
-
 
 export default function BuckLitePage() {
     // const [valueBarNegativeHeight, setValueBarNegativeHeight] = useState(30);
@@ -356,92 +359,83 @@ export default function BuckLitePage() {
             </div>
             <div className="main-content-body">
                 <div className="content-container">
-                <div className="buck-input-container">
-                    <h1>Buck Input</h1>
-                    <form className="form-container">
-                        <div className="form-group">
-                            <label htmlFor="serialNumber">Serial Number</label>
-                            <input type="text" className="form-field" onChange={handleSerialNumberChange} value={serialNumber} />
-                            {/* <TextField className="form-field" label="Serial Number" variant="filled" onChange={handleSerialNumberChange}
-                                value={serialNumber}
-                            /> */}
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="createDate">Create Date</label>
-                            <input type="date" className="form-field" onChange={handleCreateDateChange} value={createDate} />
-                            {/* <TextField className="form-field" label="Create Date" type="date" variant="filled"
-                                value={createDate}
-                                onChange={handleCreateDateChange}
-                            /> */}
-                        </div>
-                        <div className="form-group">
-                            <div className="form-group-checkbox-container">
-                                <label htmlFor="isFortWorth">IsFortWorth</label>
-                                <input type="checkbox" className="form-field" checked={isFortWorth} id="isFortWorth" onChange={handleIsFortWorthChange} />
+                    <div className="buck-input-container">
+                        <h1>Buck Input</h1>
+                        <form className="form-container">
+                            <div className="form-group">
+                                <label htmlFor="serialNumber">Serial Number</label>
+                                <input type="text" className="form-field" onChange={handleSerialNumberChange} value={serialNumber} />
                             </div>
-                            {/* <Checkbox className="example-margin" checked={isFortWorth} id="isFortWorth" onChange={handleIsFortWorthChange} />
-                            <label htmlFor="isFortWorth">IsFortWorth</label> */}
-                        </div>
-                        <div className="button-container">
-                            <button type="button" onClick={save}>Save</button>
-                            <button type="button" onClick={fetch}>Fetch</button>
-                            <button type="button" onClick={fetchSingle}>Get 1</button>
-                        </div>
-                    </form>
-                </div>
-                {/* <div className="buck-list-container">
-                    <h1>Buck List</h1>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Serial Number</th>
-                                <th>Date</th>
-                                <th>isFW</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        {isPending && (
-                            <tbody>
+                            <div className="form-group">
+                                <label htmlFor="createDate">Create Date</label>
+                                <input type="date" className="form-field" onChange={handleCreateDateChange} value={createDate} />
+                            </div>
+                            {/* <div className="form-group">
+                                <div className="form-group-checkbox-container">
+                                    <label htmlFor="isFortWorth">IsFortWorth</label>
+                                    <input type="checkbox" className="form-field" checked={isFortWorth} id="isFortWorth" onChange={handleIsFortWorthChange} />
+                                </div>
+                            </div> */}
+                            <div className="button-container">
+                                <button type="button" onClick={save}>Save</button>
+                                <button type="button" onClick={fetch}>Fetch</button>
+                                <button type="button" onClick={fetchSingle}>Get 1</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div className="buck-list-container">
+                        <h1>Buck List</h1>
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td colSpan={4}>
-                                        <Skeleton count={1} height={30} className="skeleton-loader" />
-                                    </td>
+                                    <th>Serial Number</th>
+                                    <th>Date</th>
+                                    {/* <th>isFW</th> */}
+                                    <th></th>
                                 </tr>
-                            </tbody>
-                        )}
-                        {!isPending && (
-                            <tbody>
-                                {bucks.map((buck: BuckLite) => (
-                                    buck ? (
-                                        <tr key={buck.SN} onClick={() => selectBuck(buck)} className={selectedBuck === buck ? 'selected' : ''} onKeyDown={onKeyDown}>
-                                            <>
-                                                <td>
-                                                    <div className="checkbox-container">
-                                                        <label htmlFor={buck.SN}>{buck.SN}</label>
-                                                        <input type="checkbox" id={buck.SN} className="hidden" checked={selectedBuck === buck} onChange={() => selectBuck(buck)} />
-                                                    </div>
-                                                </td>
-                                                <td><label htmlFor={buck.SN}>{formatDateFns(new Date(buck.CDT))}</label></td>
-                                                <td>
-                                                    <label htmlFor={buck.SN}>
-                                                        {buck.isFW ? (<FiCheckSquare />) : (<FiSquare />)}
-                                                    </label>
-                                                </td>
-                                                <td>
-                                                    <IconButton onClick={() => deleteBuck(buck.SN)}>
-                                                        <MdDelete className="delete-icon" />
-                                                    </IconButton>
-                                                </td>
-                                            </>
-                                        </tr>
-                                    ) : (
-                                        <tr key={'no-buck'}><td>No buck</td></tr>
-                                    )
-                                ))}
-                            </tbody>
-                        )}
-                    </table>
-                </div> */}
+                            </thead>
+                            {isPending && (
+                                <tbody>
+                                    <tr>
+                                        <td colSpan={4}>
+                                            <div className="skeleton-loader"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            )}
+                            {!isPending && (
+                                <tbody>
+                                    {bucks.map((buck: BuckLite) => (
+                                        buck ? (
+                                            <tr key={buck.SN} onClick={() => selectBuck(buck)} className={selectedBuck === buck ? 'selected' : ''} onKeyDown={onKeyDown}>
+                                                <>
+                                                    <td>
+                                                        <div className="checkbox-container">
+                                                            <label htmlFor={buck.SN}>{buck.SN}</label>
+                                                            <input type="checkbox" id={buck.SN} className="hidden" checked={selectedBuck === buck} onChange={() => selectBuck(buck)} />
+                                                        </div>
+                                                    </td>
+                                                    <td><label htmlFor={buck.SN}>{formatDateFns(new Date(buck.CDT))}</label></td>
+                                                    {/* <td>
+                                                        <label htmlFor={buck.SN}>
+                                                            {buck.isFW ? (<FontAwesomeIcon icon="check-square" />) : (<FontAwesomeIcon icon="square" />)}
+                                                        </label>
+                                                    </td> */}
+                                                    <td>
+                                                        <button onClick={() => deleteBuck(buck.SN)} className="delete-icon">
+                                                            <FontAwesomeIcon icon="trash" className="delete-icon" />
+                                                        </button>
+                                                    </td>
+                                                </>
+                                            </tr>
+                                        ) : (
+                                            <tr key={'no-buck'}><td>No buck</td></tr>
+                                        )
+                                    ))}
+                                </tbody>
+                            )}
+                        </table>
+                    </div>
 
 
 
