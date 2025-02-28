@@ -17,13 +17,6 @@ import config from '../aws-exports';
 Amplify.configure(config as any);
 
 export default function BuckLitePage() {
-    // const [valueBarNegativeHeight, setValueBarNegativeHeight] = useState(30);
-    // const [valueBarPositiveHeight, setValueBarPositiveHeight] = useState(70);
-    
-    // const updateValueBarPositiveHeight = (height: number) => {
-    //     setValueBarPositiveHeight(height);
-    //     setValueBarNegativeHeight(100 - height);
-    // }
     const [serialNumber, setSerialNumber] = useState('');
     const [createDate, setCreateDate] = useState('');
     const [isFortWorth, setIsFortWorth] = useState(false);
@@ -370,12 +363,6 @@ export default function BuckLitePage() {
                                 <label htmlFor="createDate">Create Date</label>
                                 <input type="date" className="form-field" onChange={handleCreateDateChange} value={createDate} />
                             </div>
-                            {/* <div className="form-group">
-                                <div className="form-group-checkbox-container">
-                                    <label htmlFor="isFortWorth">IsFortWorth</label>
-                                    <input type="checkbox" className="form-field" checked={isFortWorth} id="isFortWorth" onChange={handleIsFortWorthChange} />
-                                </div>
-                            </div> */}
                             <div className="button-container">
                                 <button type="button" onClick={save}>Save</button>
                                 <button type="button" onClick={fetch}>Fetch</button>
@@ -390,7 +377,6 @@ export default function BuckLitePage() {
                                 <tr>
                                     <th>Serial Number</th>
                                     <th>Date</th>
-                                    {/* <th>isFW</th> */}
                                     <th></th>
                                 </tr>
                             </thead>
@@ -416,11 +402,6 @@ export default function BuckLitePage() {
                                                         </div>
                                                     </td>
                                                     <td><label htmlFor={buck.SN}>{formatDateFns(new Date(buck.CDT))}</label></td>
-                                                    {/* <td>
-                                                        <label htmlFor={buck.SN}>
-                                                            {buck.isFW ? (<FontAwesomeIcon icon="check-square" />) : (<FontAwesomeIcon icon="square" />)}
-                                                        </label>
-                                                    </td> */}
                                                     <td>
                                                         <button onClick={() => deleteBuck(buck.SN)} className="delete-icon">
                                                             <FontAwesomeIcon icon="trash" className="delete-icon" />
@@ -436,22 +417,6 @@ export default function BuckLitePage() {
                             )}
                         </table>
                     </div>
-
-
-
-                    {/* <form>
-                        <div className="form-group">
-                            <div>
-                                <label htmlFor="value0" onClick={() => updateValueBarPositiveHeight(0)}>0</label>
-                                <input type="range" id="value0" min="0" max="100" value={valueBarPositiveHeight} onChange={(e) => updateValueBarPositiveHeight(+e.target.value)} />
-                                <label htmlFor="value100" onClick={() => updateValueBarPositiveHeight(100)}>100</label>
-                            </div>
-                        </div>
-                    </form>
-                    <div className="value-bar-container">
-                        <div className="value-bar-negative" style={{ height: `${valueBarNegativeHeight}%` }}></div>
-                        <div className="value-bar-positive" style={{ height: `${valueBarPositiveHeight}%` }}></div>
-                    </div> */}
                 </div>
             </div>
         </>
