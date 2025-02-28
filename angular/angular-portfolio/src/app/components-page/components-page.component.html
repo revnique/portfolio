@@ -6,6 +6,40 @@
 </div>
 <div class="main-content-body">
     <div class="content-container">
-        <div>ComponentsPage content</div>
+        <div class="section">
+            <h2>Slider /w Bar</h2>
+            <div class="slider-container">
+                <form>
+                    <div class="form-group">
+                        <div class="slider-form-group">
+                            <label for="value0" (click)="updateValueBarPositiveHeight(0)">0</label>
+                            <input type="range" id="value0" min="0" max="100" [value]="valueBarPositiveHeight" #value0 (change)="updateValueBarPositiveHeight(+value0.value)" />
+                            <label for="value100" (click)="updateValueBarPositiveHeight(100)">100</label>
+                        </div>
+                    </div>
+                </form>
+                <div class="slider-value-bar-container">
+                    <div class="value-bar-container-wrapper">
+                        <div class="value-bar-container">
+                            <div class="value-bar-negative" [style.height.%]="valueBarNegativeHeight"></div>
+                            <div class="value-bar-positive" [style.height.%]="valueBarPositiveHeight"></div>
+                        </div>
+                        <div class="value-bar-label">
+                            <span>{{valueBarPositiveHeight}}</span>
+                        </div>
+                    </div>
+
+                    <div class="value-bar-container-wrapper-horizontal">
+                        <div class="value-bar-container">
+                            <div class="value-bar-positive" [style.width.%]="valueBarPositiveHeight"></div>
+                            <div class="value-bar-negative" [style.width.%]="valueBarNegativeHeight"></div>
+                        </div>
+                        <div class="value-bar-label">
+                            <span>{{valueBarPositiveHeight}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
