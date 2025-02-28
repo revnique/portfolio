@@ -4,12 +4,6 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #333;
-    --foreground: #ededed;
-  }
-}
 
 html, body, #root {
   height: 100%;
@@ -20,4 +14,73 @@ body {
   background: var(--background);
   margin: 0; 
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.form-group {
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+}
+
+.form-group-checkbox-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  input {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  button {
+    padding: 10px;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+    cursor: pointer;
+    &:hover {
+      background-color: #efefef;
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #333;
+    --foreground: #ededed;
+  }
+  .form-group {
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: transparent;
+      color: #fff;
+    }
+  }
+  .button-container {
+    button {
+      border: 1px solid #ccc;
+      background-color: transparent;
+      color: #fff;
+      &:hover {
+        background-color: #777;
+      }
+    }
+  }
+  .form-group-checkbox-container {
+    input {
+      background-color: transparent;
+    }
+  }
 }

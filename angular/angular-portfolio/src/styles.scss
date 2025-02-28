@@ -1,25 +1,86 @@
-/* You can add global styles to this file, and also import other style files */
 
 :root {
-    --background: #ffffff;
-    --foreground: #171717;
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+body {
+  color: var(--foreground);
+  background: var(--background);
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.form-group {
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
   }
-  
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background: #333;
-      --foreground: #ededed;
+}
+
+.form-group-checkbox-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  input {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  button {
+    padding: 10px;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+    cursor: pointer;
+    &:hover {
+      background-color: #efefef;
     }
   }
-  
-  html, body, #root {
-    height: 100%;
-    width: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #333;
+    --foreground: #ededed;
   }
-  body {
-    color: var(--foreground);
-    background: var(--background);
-    margin: 0; 
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+  .form-group {
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: transparent;
+      color: #fff;
+    }
   }
-  
+  .button-container {
+    button {
+      border: 1px solid #ccc;
+      background-color: transparent;
+      color: #fff;
+      &:hover {
+        background-color: #777;
+      }
+    }
+  }
+  .form-group-checkbox-container {
+    input {
+      background-color: transparent;
+    }
+  }
+}

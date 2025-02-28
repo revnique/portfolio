@@ -8,5 +8,21 @@ import { Component } from '@angular/core';
   styleUrl: './buck-lite.component.scss'
 })
 export class BuckLiteComponent {
+  serialNumber: string = '';
+  createDate: string = '';
+  isFortWorth: boolean = false;
 
+  save() {
+    console.log('save');
+  } 
+
+  fetch() {
+    console.log('fetch');
+  } 
+
+  fetchSingle() {
+    console.log('fetchSingle');
+  } 
+  
+  
 }

@@ -18,3 +18,10 @@
         transition: height 0.5s ease-in-out;
     }
 }
+
+.form-container {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

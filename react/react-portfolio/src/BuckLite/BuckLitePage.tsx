@@ -358,15 +358,15 @@ export default function BuckLitePage() {
                 <div className="content-container">
                 <div className="buck-input-container">
                     <h1>Buck Input</h1>
-                    <form>
-                        <div>
+                    <form className="form-container">
+                        <div className="form-group">
                             <label htmlFor="serialNumber">Serial Number</label>
                             <input type="text" className="form-field" onChange={handleSerialNumberChange} value={serialNumber} />
                             {/* <TextField className="form-field" label="Serial Number" variant="filled" onChange={handleSerialNumberChange}
                                 value={serialNumber}
                             /> */}
                         </div>
-                        <div>
+                        <div className="form-group">
                             <label htmlFor="createDate">Create Date</label>
                             <input type="date" className="form-field" onChange={handleCreateDateChange} value={createDate} />
                             {/* <TextField className="form-field" label="Create Date" type="date" variant="filled"
@@ -374,13 +374,14 @@ export default function BuckLitePage() {
                                 onChange={handleCreateDateChange}
                             /> */}
                         </div>
-                        <div>
-                            <label htmlFor="isFortWorth">IsFortWorth</label>
-                            <input type="checkbox" className="form-field" checked={isFortWorth} id="isFortWorth" onChange={handleIsFortWorthChange} />
+                        <div className="form-group">
+                            <div className="form-group-checkbox-container">
+                                <label htmlFor="isFortWorth">IsFortWorth</label>
+                                <input type="checkbox" className="form-field" checked={isFortWorth} id="isFortWorth" onChange={handleIsFortWorthChange} />
+                            </div>
                             {/* <Checkbox className="example-margin" checked={isFortWorth} id="isFortWorth" onChange={handleIsFortWorthChange} />
                             <label htmlFor="isFortWorth">IsFortWorth</label> */}
                         </div>
-                        <hr className="separator" />
                         <div className="button-container">
                             <button type="button" onClick={save}>Save</button>
                             <button type="button" onClick={fetch}>Fetch</button>
