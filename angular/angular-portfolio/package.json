@@ -20,6 +20,8 @@
     "@angular/router": "^18.0.0",
     "@fortawesome/angular-fontawesome": "^0.15.0",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@tanstack/angular-query-experimental": "^5.66.9",
+    "aws-amplify": "^6.13.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

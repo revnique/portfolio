@@ -106,6 +106,10 @@
             }
             ::ng-deep .content-container {
                 padding: 25px;
+                display: flex;
+                flex-direction: row;
+                justify-content: start;
+                gap: 25px;
             }
         }
     }
