@@ -102,7 +102,7 @@
             }
             ::ng-deep .summary {
                 text-align: center;
-                padding: 5px 0px;
+                padding: 5px 15px;
             }
             ::ng-deep .content-container {
                 padding: 25px;
@@ -167,6 +167,8 @@
                 width: 100%;
                 ::ng-deep .content-container {
                     flex-direction: column;
+                    padding: 0px;
+                    gap: 0px;
                 }
             }
         }

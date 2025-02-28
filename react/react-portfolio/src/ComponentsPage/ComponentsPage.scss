@@ -81,3 +81,9 @@
     flex-direction: row;
     align-items: end;
 }
+
+@media (max-width: 768px) {
+    .content-container {
+        align-items: center;
+    }
+}
