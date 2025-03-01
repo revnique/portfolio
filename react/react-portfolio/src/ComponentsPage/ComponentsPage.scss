@@ -14,7 +14,7 @@
 
     .value-bar-positive {
         width: 100%;
-        background-color: rgb(105 245 171);
+        background-color: green;
         transition: height 0.5s ease-in-out;
     }
 }
@@ -85,5 +85,13 @@
 @media (max-width: 768px) {
     .content-container {
         align-items: center;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .value-bar-container {
+        .value-bar-positive {
+            background-color: rgb(105 245 171);
+        }
     }
 }
