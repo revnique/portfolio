@@ -13,7 +13,7 @@ import { faBars, faClose, faCode, faMoneyBill } from '@fortawesome/free-solid-sv
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'angular-portfolio';
+  title = "Revnique's Angular Portfolio";
   sideBarOpen = false;
   isActive = false;
   faBars = faBars;
