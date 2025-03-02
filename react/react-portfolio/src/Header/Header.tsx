@@ -2,14 +2,14 @@ import './Header.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { useState } from 'react';
 library.add(faBars);
-
+import { useDispatch } from 'react-redux';
+import { toggleSideBar as toggleSideBarAction } from '../store/root.actions';
 
 export default function Header() {
-    const [sideBarOpen, setSideBarOpen] = useState(false);
+    const dispatch = useDispatch();
     const toggleSideBar = () => {
-        setSideBarOpen(!sideBarOpen);
+        dispatch(toggleSideBarAction());
     }
     const gotToAngular = () => {
         const page = window.location.href.split('/')[3];

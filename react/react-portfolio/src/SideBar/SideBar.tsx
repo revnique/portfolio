@@ -1,15 +1,19 @@
 import './SideBar.scss';
-import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faMoneyBill, faCode, faClose, faBars } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleSideBar as toggleSideBarAction } from '../store/root.actions';
+import { RootState } from '../store/root.state';
 library.add(faMoneyBill, faCode, faClose, faBars);
 
 export default function SideBar() {
-    const [sideBarOpen, setSideBarOpen] = useState(false);
+    const dispatch = useDispatch();
+    const state = useSelector((state: any) => state.reducer as RootState);
+    const sideBarOpen = state.sidebarState.sidebarIsOpen;
     const toggleSideBar = () => {
-        setSideBarOpen(!sideBarOpen);
+        dispatch(toggleSideBarAction());
     }
     
     return (

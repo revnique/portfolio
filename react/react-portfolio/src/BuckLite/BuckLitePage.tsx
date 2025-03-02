@@ -81,10 +81,8 @@ export default function BuckLitePage() {
         serialNumberChange(event.target.value);
     }
     const serialNumberChange = (val: string) => {
-        console.log('serialNumberChange', val);
         if (checkSerial(val)) {
             const match = getMatches(val);
-            console.log(val, match);
             setMatches(match);
         } else {
             setMatches(initialMatch);
