@@ -1,0 +1,15 @@
+
+<div class="header">
+    <div class="side-bar-toggle" (click)="toggleSideBar()"><fa-icon class="fa-icon" [icon]="faBars" /></div>
+    <div class="header-left">
+        <h1>Revnique's Angular Portfolio</h1>
+    </div>
+    <div class="header-right">
+        <div class="logo-container">
+            <img class="logo" src="/react-logo.png" alt="Revnique's React Portfolio" (click)="gotoReact()" />
+        </div>
+        <div class="logo-container selected">
+            <img class="logo" src="/angular-logo.png" alt="Revnique's Angular Portfolio"/>
+        </div>
+    </div>
+</div>

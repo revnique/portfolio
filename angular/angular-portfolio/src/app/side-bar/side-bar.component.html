@@ -1,0 +1,7 @@
+<div class="side-bar" [ngClass]="{'open': sidebarIsOpen, 'closed': !sidebarIsOpen}">
+    <div class="side-bar-header">Projects<fa-icon class="fa-icon" [icon]="faClose" (click)="toggleSideBar()" /></div>
+    <ul>
+        <li><a routerLink="/bucklite" routerLinkActive="selected"><fa-icon class="fa-icon" [icon]="faMoneyBill" /> BuckLite</a></li>
+        <li><a routerLink="/components" routerLinkActive="selected"><fa-icon class="fa-icon" [icon]="faCode" /> Components</a></li>
+    </ul>
+</div>

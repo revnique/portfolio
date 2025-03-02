@@ -1,28 +1,9 @@
 <div class="home-page-container">
-  <div class="header">
-      <div class="side-bar-toggle" (click)="toggleSideBar()"><fa-icon class="fa-icon" [icon]="faBars" /></div>
-      <div class="header-left">
-          <h1>Revnique's Angular Portfolio</h1>
-      </div>
-      <div class="header-right">
-          <div class="logo-container">
-              <img class="logo" src="/react-logo.png" alt="Revnique's React Portfolio" (click)="gotoReact()" />
-          </div>
-          <div class="logo-container selected">
-              <img class="logo" src="/angular-logo.png" alt="Revnique's Angular Portfolio"/>
-          </div>
-      </div>
-  </div>
+  <app-header></app-header>
   <div class="content">
-      <div class="side-bar" [ngClass]="{'open': sideBarOpen, 'closed': !sideBarOpen}">
-          <div class="side-bar-header">Projects<fa-icon class="fa-icon" [icon]="faClose" (click)="toggleSideBar()" /></div>
-          <ul>
-              <li><a routerLink="/bucklite" routerLinkActive="selected"><fa-icon class="fa-icon" [icon]="faMoneyBill" /> BuckLite</a></li>
-              <li><a routerLink="/components" routerLinkActive="selected"><fa-icon class="fa-icon" [icon]="faCode" /> Components</a></li>
-          </ul>
-      </div>
-      <div class="main-content">
-          <router-outlet></router-outlet>
-      </div>
+    <app-side-bar></app-side-bar>
+    <div class="main-content">
+        <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

@@ -4,6 +4,7 @@ import { ToggleSideBarSuccess } from "./root.actions";
 import portfolioReducer from "./PortfolioStore/portfolio.reducer";
 
 const reducer = (state = initialRootState, action:any) => {
+    console.log('root action', action);
     switch (action.type) {
         case ToggleSideBarSuccess:
             return {
