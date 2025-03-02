@@ -4,10 +4,10 @@ import { RootActions, selectRootState } from '../../store/root.actions';
 import { faClose, faCode, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
-
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-side-bar',
-  imports: [FontAwesomeModule, CommonModule],
+  imports: [FontAwesomeModule, CommonModule, RouterModule],
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.scss'
 })
