@@ -12,11 +12,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-buck-lite',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule],
-  templateUrl: './buck-lite.component.html',
-  styleUrl: './buck-lite.component.scss'
+    selector: 'app-buck-lite',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule],
+    templateUrl: './buck-lite.component.html',
+    styleUrl: './buck-lite.component.scss'
 })
 export class BuckLiteComponent implements OnInit {
   faTrash = faTrash;
