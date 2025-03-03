@@ -11,72 +11,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faCheckSquare, faSquare } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 library.add(faTrash, faCheckSquare, faSquare);
-
+import { useSelector } from 'react-redux';
+import { PortfolioState } from '../store/PortfolioStore/portfolio.state';
+import { isPending, loadBuckLite, loadBuckLites } from '../store/PortfolioStore/portfolio.actions';
+import { useDispatch } from 'react-redux';
 // @ts-ignore
 import config from '../aws-exports';
 Amplify.configure(config as any);
 
 export default function BuckLitePage() {
+    const state = useSelector((state:any) => state.portfolioReducer as PortfolioState);
+    const dispatch = useDispatch();
     const [serialNumber, setSerialNumber] = useState('');
     const [createDate, setCreateDate] = useState('');
     const [isFortWorth, setIsFortWorth] = useState(false);
-    const [isStarNote, setIsStarNote] = useState(false);
-    const [isPalindrome, setIsPalindrome] = useState(false);
-    const [isAllPairs2, setIsAllPairs2] = useState(false);
-    const [isAllPairs4, setIsAllPairs4] = useState(false);
-    const [isRepeatingPairs2, setIsRepeatingPairs2] = useState(false);
-    const [isRepeatingPairs4, setIsRepeatingPairs4] = useState(false);
-    const [isUniqueDigits, setIsUniqueDigits] = useState(false);
-    const [isOneDigit, setIsOneDigit] = useState(false);
-    const [isTwoDigits, setIsTwoDigits] = useState(false);
-    const [isSixOrMoreSameDigit, setIsSixOrMoreSameDigit] = useState(false);
-    const [isDate, setIsDate] = useState(false);
-    const [isEuroDate, setIsEuroDate] = useState(false);
-    const [bucks, setBucks] = useState<BuckLite[]>([]);
-    const [isPending, setIsPending] = useState(false);
     const client = generateClient();
     const queryClient = useQueryClient();
     const [selectedBuck, setSelectedBuck] = useState<BuckLite | null>(null);
 
-    const handleIsFortWorthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIsFortWorth(event.target.checked);
-    }
-    const handleIsStarNoteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIsStarNote(event.target.checked);
-    }
-    const handleIsPalindromeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIsPalindrome(event.target.checked);
-    }
-    const handleIsAllPairs2Change = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIsAllPairs2(event.target.checked);
-    }
-    const handleIsAllPairs4Change = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIsAllPairs4(event.target.checked);
-    }
-    const handleIsRepeatingPairs2Change = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIsRepeatingPairs2(event.target.checked);
-    }
-    const handleIsRepeatingPairs4Change = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIsRepeatingPairs4(event.target.checked);
-    }
-    const handleIsUniqueDigitsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIsUniqueDigits(event.target.checked);
-    }
-    const handleIsOneDigitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIsOneDigit(event.target.checked);
-    }
-    const handleIsTwoDigitsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIsTwoDigits(event.target.checked);
-    }
-    const handleIsSixOrMoreSameDigitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIsSixOrMoreSameDigit(event.target.checked);
-    }
-    const handleIsDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIsDate(event.target.checked);
-    }
-    const handleIsEuroDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIsEuroDate(event.target.checked);
-    }
     const handleSerialNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         serialNumberChange(event.target.value);
     }
@@ -98,15 +50,14 @@ export default function BuckLitePage() {
         console.log('save');
         const CDT = createDate;
         const isFW = isFortWorth;
-        setIsPending(true);
+        dispatch(isPending(true));
 
       
       try {
         const buckLite:any = await fetchSingle();
         if (buckLite) {
           await update();
-          setIsPending(false);
-          fetch();
+          dispatch(isPending(false));
         } else {
           addBuckLite.mutate({
             SN: serialNumber,
@@ -182,7 +133,7 @@ export default function BuckLitePage() {
         // Always refetch after error or success:
         onSettled: (newBuckLite: any) => {
             queryClient.invalidateQueries({ queryKey: ['addBuckLite', newBuckLite?.SN] });
-            setIsPending(false);
+            dispatch(isPending(false));
             fetch();
         },
     });
@@ -249,61 +200,13 @@ export default function BuckLitePage() {
     }
 
     const setMatches = (match: Match) => {
-        setIsStarNote(match.IsStarNote);
-        setIsAllPairs2(match.IsAllPairs2);
-        setIsAllPairs4(match.IsAllPairs4);
-        setIsRepeatingPairs2(match.IsRepeatingPairs2);
-        setIsRepeatingPairs4(match.IsRepeatingPairs4);
-        setIsUniqueDigits(match.IsUniqueDigits);
-        setIsOneDigit(match.IsOneDigit);
-        setIsTwoDigits(match.IsTwoDigits);
-        setIsSixOrMoreSameDigit(match.IsSixOrMoreSameDigit);
-        setIsPalindrome(match.IsPalindrome);
-        setIsDate(match.IsDate);
-        setIsEuroDate(match.IsEuroDate);
     }
   
     const fetch = async () => {
-        console.log('fetch');
-        const response:any = await client.graphql({
-            query: `
-              query listBuckLites {
-                listBuckLites {
-                  items {
-                    SN
-                    CDT
-                    isFW
-                  }
-                }
-              }
-            `,
-          });
-          console.log(response);
-          let tmp = response.data.listBuckLites.items;
-          tmp.forEach((buck: any, index: number) => {
-            buck.index = index;
-          });
-          setBucks(tmp);
+        dispatch(loadBuckLites());
     }   
     const fetchSingle = async () => {
-        console.log('fetchSingle');
-        const response:any = await client.graphql({
-          query: `
-            query getBuckLite($SN: String!) {
-              getBuckLite(SN: $SN) {
-                SN
-                CDT
-                isFW
-              }
-            }
-          `,  
-          variables: {
-            "SN": serialNumber
-          }
-        });
-        console.log(response);
-        setBucks([response.data.getBuckLite]);
-        return response.data.getBuckLite;
+        dispatch(loadBuckLite(serialNumber));
     }
     const selectBuck = (buck: BuckLite) => {
         console.log('selectBuck', buck);
@@ -378,18 +281,21 @@ export default function BuckLitePage() {
                                     <th></th>
                                 </tr>
                             </thead>
-                            {isPending && (
+                            {state.isPending && (
                                 <tbody>
                                     <tr>
                                         <td colSpan={4}>
-                                            <div className="skeleton-loader"></div>
+                                            <div className="skeleton-loader-container">
+                                                <div className="skeleton-loader-base"></div>
+                                                <div className="skeleton-loader-indicator"></div>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
                             )}
-                            {!isPending && (
+                            {!state.isPending && (
                                 <tbody>
-                                    {bucks.map((buck: BuckLite) => (
+                                    {state.BuckLites.map((buck: BuckLite) => (
                                         buck ? (
                                             <tr key={buck.SN} onClick={() => selectBuck(buck)} className={selectedBuck === buck ? 'selected' : ''} onKeyDown={onKeyDown}>
                                                 <>
