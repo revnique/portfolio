@@ -1,6 +1,7 @@
 
 .form-container {
     width: 100%;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     background-color: #efefef;
@@ -21,7 +22,19 @@
     }
 }
 .buck-input-container {
+    min-width: 275px;
     margin: 0 25px;
+    .buck-value-container {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0;
+        margin: 10px 0px 0px 0px;
+        .buck-value-label {
+            margin-bottom: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
 }
 
 .buck-list-container {
@@ -209,4 +222,8 @@
             width: 100%;
         }
     }
+}
+
+.align-right {
+    text-align: right;
 }

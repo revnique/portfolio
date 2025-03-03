@@ -1,13 +1,11 @@
 import { useState } from "react";
 import './ComponentsPage.scss';
-
+import ValueBar from "../ValueBar/ValueBar";
 export default function ComponentsPage() {
-    const [valueBarNegativeHeight, setValueBarNegativeHeight] = useState(30);
     const [valueBarPositiveHeight, setValueBarPositiveHeight] = useState(70);
     
     const updateValueBarPositiveHeight = (height: number) => {
         setValueBarPositiveHeight(height);
-        setValueBarNegativeHeight(100 - height);
     }
     return (
         <>
@@ -32,24 +30,11 @@ export default function ComponentsPage() {
                                 </div>
                             </form>
                             <div className="slider-value-bar-container">
-                                <div className="value-bar-container-wrapper">
-                                    <div className="value-bar-container">
-                                        <div className="value-bar-negative" style={{ height: `${valueBarNegativeHeight}%` }}></div>
-                                        <div className="value-bar-positive" style={{ height: `${valueBarPositiveHeight}%` }}></div>
-                                    </div>
-                                    <div className="value-bar-label">
-                                        <span>{valueBarPositiveHeight}</span>
-                                    </div>
+                                <div className="vertical">
+                                    <ValueBar valueBarPositiveHeight={valueBarPositiveHeight} isHorizontal={false} length={150} thickness={50} />
                                 </div>
-
-                                <div className="value-bar-container-wrapper-horizontal">
-                                    <div className="value-bar-container">
-                                        <div className="value-bar-positive" style={{ width: `${valueBarPositiveHeight}%` }}></div>
-                                        <div className="value-bar-negative" style={{ width: `${valueBarNegativeHeight}%` }}></div>
-                                    </div>
-                                    <div className="value-bar-label">
-                                        <span>{valueBarPositiveHeight}</span>
-                                    </div>
+                                <div className="horizontal">
+                                    <ValueBar valueBarPositiveHeight={valueBarPositiveHeight} isHorizontal={true} length={150} thickness={50} />
                                 </div>
                             </div>
                         </div>

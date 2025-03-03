@@ -1,5 +1,5 @@
 import './BuckLitePage.scss';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { getMatches } from './buck-helper';
 import { format } from 'date-fns';
@@ -15,6 +15,8 @@ import { useSelector } from 'react-redux';
 import { PortfolioState } from '../store/PortfolioStore/portfolio.state';
 import { setIsPending, loadBuckLite, loadBuckLites } from '../store/PortfolioStore/portfolio.actions';
 import { useDispatch } from 'react-redux';
+import ValueBar from '../ValueBar/ValueBar';
+import { useBreakpoint } from '../services/PortfolioService';
 // @ts-ignore
 import config from '../aws-exports';
 Amplify.configure(config as any);
@@ -28,7 +30,7 @@ export default function BuckLitePage() {
     const client = generateClient();
     const queryClient = useQueryClient();
     const [selectedBuck, setSelectedBuck] = useState<BuckLite | null>(null);
-
+    const breakpoint = useBreakpoint();
     const handleSerialNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         serialNumberChange(event.target.value);
     }
@@ -41,7 +43,6 @@ export default function BuckLitePage() {
         }
         setSerialNumber(val);
     }
-    
     const handleCreateDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCreateDate(event.target.value);
     }
@@ -64,6 +65,7 @@ export default function BuckLitePage() {
             CDT: CDT,
             isFW: isFW,
             index: -1,
+            match: initialMatch,
           });
         }
       } catch (error) {
@@ -72,6 +74,7 @@ export default function BuckLitePage() {
           CDT: CDT,
           isFW: isFW,
           index: -1,
+          match: initialMatch,
         });
         console.log(error);
       }
@@ -286,6 +289,10 @@ export default function BuckLitePage() {
                                 <button type="button" onClick={fetchSingle}>Get 1</button>
                             </div>
                         </form>
+                        <div className="buck-value-container">
+                            <div className="buck-value-label">Rating</div>
+                            <ValueBar valueBarPositiveHeight={selectedBuck?.match?.RatingValue || 1} isHorizontal={true} length={breakpoint === 'mobile' ? 355 : 275} thickness={breakpoint === 'mobile' ? 20 : 30} />
+                        </div>
                     </div>
                     <div className="buck-list-container">
                         <h1>Buck List</h1>
@@ -294,6 +301,7 @@ export default function BuckLitePage() {
                                 <tr>
                                     <th>Serial Number</th>
                                     <th>Date</th>
+                                    <th>Rating</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -322,6 +330,7 @@ export default function BuckLitePage() {
                                                         </div>
                                                     </td>
                                                     <td><label htmlFor={buck.SN}>{formatDateFns(new Date(buck.CDT))}</label></td>
+                                                    <td className="align-right"><label htmlFor={buck.SN}>{buck.match?.RatingValue}&nbsp;&nbsp;&nbsp;</label></td>
                                                     <td>
                                                         <button onClick={() => deleteBuck(buck.SN)} className="delete-icon">
                                                             <FontAwesomeIcon icon="trash" className="delete-icon" />

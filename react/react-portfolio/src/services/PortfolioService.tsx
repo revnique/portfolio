@@ -46,3 +46,25 @@ export const fetchBuckLites = async () => {
     });
     return tmp;
 }  
+
+import { useState, useEffect } from 'react';
+
+export const useBreakpoint = () => {
+  const [screenSize, setScreenSize] = useState('');
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 768) setScreenSize('mobile');
+      else if (width < 1024) setScreenSize('tablet');
+      else setScreenSize('desktop');
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return screenSize;
+};
