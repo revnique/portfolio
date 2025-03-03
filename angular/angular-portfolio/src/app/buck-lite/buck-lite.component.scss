@@ -105,6 +105,37 @@
     }
 }
 
+.skeleton-loader-container {
+    position: relative;
+    .skeleton-loader-base {
+        height: 30px;
+        width: 300px;
+        background-color: transparent;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .skeleton-loader-indicator {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 30px;
+        width: 50px;
+        background-color: lightsteelblue;
+        animation-name: slide;
+        animation-duration: 1.5s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+}
+
+@keyframes slide {
+    0% { transform: translateX(0px); background-color: lightgreen; }
+    50% { transform: translateX(250px); background-color: lightsteelblue; }
+    100% { transform: translateX(0px); background-color: steelblue; }
+}
+
 @media (prefers-color-scheme: dark) {
     .form-container {
         background-color: #333;
@@ -121,6 +152,22 @@
             .delete-icon {
                 color: #fff;
             }
+        }
+    }
+
+    .skeleton-loader-container {
+        .skeleton-loader-base {
+            background-color: transparent;
+        }
+
+        .skeleton-loader-indicator {
+            background-color: lightsteelblue;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0px); background-color: rgb(105 245 171); }
+            50% { transform: translateX(250px); background-color: lightsteelblue; }
+            100% { transform: translateX(0px); background-color: rgb(92 107 192); }
         }
     }
 }

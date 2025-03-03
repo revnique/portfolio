@@ -13,7 +13,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 library.add(faTrash, faCheckSquare, faSquare);
 import { useSelector } from 'react-redux';
 import { PortfolioState } from '../store/PortfolioStore/portfolio.state';
-import { isPending, loadBuckLite, loadBuckLites } from '../store/PortfolioStore/portfolio.actions';
+import { setIsPending, loadBuckLite, loadBuckLites } from '../store/PortfolioStore/portfolio.actions';
 import { useDispatch } from 'react-redux';
 // @ts-ignore
 import config from '../aws-exports';
@@ -50,14 +50,14 @@ export default function BuckLitePage() {
         console.log('save');
         const CDT = createDate;
         const isFW = isFortWorth;
-        dispatch(isPending(true));
+        dispatch(setIsPending(true));
 
       
       try {
         const buckLite:any = await fetchSingle();
         if (buckLite) {
           await update();
-          dispatch(isPending(false));
+          dispatch(setIsPending(false));
         } else {
           addBuckLite.mutate({
             SN: serialNumber,
@@ -133,7 +133,7 @@ export default function BuckLitePage() {
         // Always refetch after error or success:
         onSettled: (newBuckLite: any) => {
             queryClient.invalidateQueries({ queryKey: ['addBuckLite', newBuckLite?.SN] });
-            dispatch(isPending(false));
+            dispatch(setIsPending(false));
             fetch();
         },
     });
@@ -218,6 +218,22 @@ export default function BuckLitePage() {
     }
     const onKeyDown = (event: React.KeyboardEvent<HTMLTableRowElement>) => {
         console.log('onKeyDown', event);
+        if (event.key === 'ArrowDown' ) {
+            if (selectedBuck) {
+                const index = selectedBuck.index + 1;
+                if (index < state.BuckLites.length) {
+                    selectBuck(state.BuckLites[index]);
+                }
+            }
+        }
+        if (event.key === 'ArrowUp' ) {
+            if (selectedBuck) {
+                const index = selectedBuck.index - 1;
+                if (index >= 0) {
+                    selectBuck(state.BuckLites[index]);
+                }
+            }
+        }
     }
     const deleteBuck = async (serialNumber: string) => {
         await client.graphql({

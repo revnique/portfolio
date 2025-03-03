@@ -1,4 +1,4 @@
-import { LoadBuckLites, LoadBuckLite, LoadBuckLitesSuccess, LoadBuckLiteSuccess, IsPending } from "./portfolio.actions";
+import { LoadBuckLites, LoadBuckLite, LoadBuckLitesSuccess, LoadBuckLiteSuccess, SetIsPending } from "./portfolio.actions";
 import { initialPortfolioState } from "./portfolio.state";
 
 const portfolioReducer = (state = initialPortfolioState, action:any) => {
@@ -26,7 +26,7 @@ const portfolioReducer = (state = initialPortfolioState, action:any) => {
                 BuckLite: action.payload,
                 isPending: false
             };
-        case IsPending:
+        case SetIsPending:
             return {
                 ...state,
                 isPending: action.payload

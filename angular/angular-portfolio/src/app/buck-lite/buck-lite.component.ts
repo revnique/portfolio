@@ -10,6 +10,9 @@ import { getMatches, Match, BuckLite } from './buck-helper';
 import { injectMutation, QueryClient } from '@tanstack/angular-query-experimental';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Store } from '@ngrx/store';
+import { PortfolioState } from '../../store/portfolio-store/portfolio.state';
+import { PortfolioActions, selectPortfolioState } from '../../store/portfolio-store/portfolio.actions';
 
 @Component({
     selector: 'app-buck-lite',
@@ -18,29 +21,16 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
     styleUrl: './buck-lite.component.scss'
 })
 export class BuckLiteComponent implements OnInit {
+  constructor(private store: Store<{ portfolio: PortfolioState }>) {}
   faTrash = faTrash;
   buckInputForm = new FormGroup({
     serialNumber: new FormControl('', [Validators.required, Validators.pattern(/^[a-lA-L]{1}\d{8}[a-np-yA-NP-Y*]{1}$/)]),
     createDate: new FormControl('', [Validators.required]),
     isFortWorth: new FormControl(false),
-    isStarNote: new FormControl(false),
-    IsAllPairs2: new FormControl(false),
-    IsAllPairs4: new FormControl(false),
-    IsRepeatingPairs2: new FormControl(false),
-    IsRepeatingPairs4: new FormControl(false),
-    IsUniqueDigits: new FormControl(false),
-    IsOneDigit: new FormControl(false),
-    IsTwoDigits: new FormControl(false),
-    IsSixOrMoreSameDigit: new FormControl(false),
-    IsPalindrome: new FormControl(false),
-    IsDate: new FormControl(false),
-    IsEuroDate: new FormControl(false),
   });
   client = generateClient();
-  bucks: BuckLite[] = [];
   selectedBuck: BuckLite | null = null;
   queryClient = inject(QueryClient);
-  isPending = false;
   prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   initialMatch: Match = {
     IsStarNote: false,
@@ -64,9 +54,14 @@ export class BuckLiteComponent implements OnInit {
     IsEuroDateDate: null,
     RatingValue: 0
   };
-
+  state$ = this.store.select(selectPortfolioState);
+  state: PortfolioState | null = null;
   ngOnInit(): void {
+    console.log('ngOnInit', this.state$);
     Amplify.configure(config as any);
+    this.state$.subscribe((state: PortfolioState) => {
+      this.state = state;
+    });
     this.buckInputForm.get('createDate')?.setValue(new Date('2024-11-11').toISOString().slice(0, 10));
     this.buckInputForm.get('serialNumber')?.valueChanges.subscribe((val: string | null) => {
       if (val) {
@@ -80,35 +75,11 @@ export class BuckLiteComponent implements OnInit {
         }
       }
     });
-    this.buckInputForm.get('isStarNote')?.disable();
-    this.buckInputForm.get('IsAllPairs2')?.disable();
-    this.buckInputForm.get('IsAllPairs4')?.disable();
-    this.buckInputForm.get('IsRepeatingPairs2')?.disable();
-    this.buckInputForm.get('IsRepeatingPairs4')?.disable();
-    this.buckInputForm.get('IsUniqueDigits')?.disable();
-    this.buckInputForm.get('IsOneDigit')?.disable();
-    this.buckInputForm.get('IsTwoDigits')?.disable();
-    this.buckInputForm.get('IsSixOrMoreSameDigit')?.disable();
-    this.buckInputForm.get('IsPalindrome')?.disable();
-    this.buckInputForm.get('IsDate')?.disable();
-    this.buckInputForm.get('IsEuroDate')?.disable();
     this.buckInputForm.get('serialNumber')?.setValue('K77777773*');
     this.fetch();
   }
 
   setMatches(match: Match) {
-    this.buckInputForm.get('isStarNote')?.setValue(match.IsStarNote);
-    this.buckInputForm.get('IsAllPairs2')?.setValue(match.IsAllPairs2);
-    this.buckInputForm.get('IsAllPairs4')?.setValue(match.IsAllPairs4);
-    this.buckInputForm.get('IsRepeatingPairs2')?.setValue(match.IsRepeatingPairs2);
-    this.buckInputForm.get('IsRepeatingPairs4')?.setValue(match.IsRepeatingPairs4);
-    this.buckInputForm.get('IsUniqueDigits')?.setValue(match.IsUniqueDigits);
-    this.buckInputForm.get('IsOneDigit')?.setValue(match.IsOneDigit);
-    this.buckInputForm.get('IsTwoDigits')?.setValue(match.IsTwoDigits);
-    this.buckInputForm.get('IsSixOrMoreSameDigit')?.setValue(match.IsSixOrMoreSameDigit);
-    this.buckInputForm.get('IsPalindrome')?.setValue(match.IsPalindrome);
-    this.buckInputForm.get('IsDate')?.setValue(match.IsDate);
-    this.buckInputForm.get('IsEuroDate')?.setValue(match.IsEuroDate);
   }
 
   checkSerial(sn: string) {
@@ -121,14 +92,13 @@ export class BuckLiteComponent implements OnInit {
     console.log(this.buckInputForm.value);
     const CDT = new Date(this.buckInputForm.get('createDate')?.value!).toISOString().slice(0, 10);
     const isFW = this.buckInputForm.get('isFortWorth')?.value!;
-    this.isPending = true;
 
     
     try {
       const buckLite:any = await this.fetchSingle();
       if (buckLite) {
         await this.update();
-        this.isPending = false;
+        this.store.dispatch(PortfolioActions.setIsPending({ isPending: false }));
         this.fetch();
       } else {
         this.addBuckLite.mutate({
@@ -173,44 +143,11 @@ export class BuckLiteComponent implements OnInit {
   }
 
   async fetchSingle() {
-    console.log('fetch');
-    const response:any = await this.client.graphql({
-      query: `
-        query getBuckLite($SN: String!) {
-          getBuckLite(SN: $SN) {
-            SN
-            CDT
-            isFW
-          }
-        }
-      `,  
-      variables: {
-        "SN": this.buckInputForm.get('serialNumber')?.value!,
-      }
-    });
-    this.bucks = [response.data.getBuckLite];
-    return response.data.getBuckLite;
+    this.store.dispatch(PortfolioActions.loadBuckLite({SN: this.buckInputForm.get('serialNumber')?.value!}));
   }
 
   async fetch() {
-    console.log('fetch');
-    const response:any = await this.client.graphql({
-      query: `
-        query listBuckLites {
-          listBuckLites {
-            items {
-              SN
-              CDT
-              isFW
-            }
-          }
-        }
-      `,
-    });
-    this.bucks = response.data.listBuckLites.items;
-    this.bucks.forEach((buck, index) => {
-      buck.index = index;
-    });
+    this.store.dispatch(PortfolioActions.loadBuckLites());
   }
 
   async update() {
@@ -317,7 +254,7 @@ export class BuckLiteComponent implements OnInit {
     // Always refetch after error or success:
     onSettled: (newBuckLite: any) => {
       this.queryClient.invalidateQueries({ queryKey: ['addBuckLite', newBuckLite?.SN] });
-      this.isPending = false;
+      this.store.dispatch(PortfolioActions.setIsPending({ isPending: false }));
       this.fetch();
     },
 
@@ -328,8 +265,8 @@ export class BuckLiteComponent implements OnInit {
     if (event.key === 'ArrowDown' ) {
       if (this.selectedBuck) {
         const index = this.selectedBuck.index + 1;
-        if (index < this.bucks.length) {
-          this.selectBuck(this.bucks[index]);
+        if (index < (this.state?.BuckLites?.length || 0)) {
+          this.selectBuck(this.state?.BuckLites[index]);
         }
       }
     }
@@ -337,7 +274,7 @@ export class BuckLiteComponent implements OnInit {
       if (this.selectedBuck) {
         const index = this.selectedBuck.index - 1;
         if (index >= 0) {
-          this.selectBuck(this.bucks[index]);
+          this.selectBuck(this.state?.BuckLites[index]);
         }
       }
     }

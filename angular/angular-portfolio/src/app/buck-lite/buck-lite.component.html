@@ -26,19 +26,22 @@
         </div>
         <div class="buck-list-container">
             <h1>Buck List</h1>
-            <table>
+            <table *ngIf="state$ | async as PortfolioState">
                 <tr>
                     <th>Serial Number</th>
                     <th>Date</th>
                     <th></th>
                 </tr>
-                <tr *ngIf="isPending">
+                <tr *ngIf="PortfolioState.isPending">
                     <td colspan="4">
-                        <div class="skeleton-loader"></div>
+                        <div class="skeleton-loader-container">
+                            <div class="skeleton-loader-base"></div>
+                            <div class="skeleton-loader-indicator"></div>
+                        </div>
                     </td>
                 </tr>
-                <ng-container *ngIf="!isPending">
-                    <tr *ngFor="let buck of bucks" (click)="selectBuck(buck)" [class.selected]="selectedBuck === buck" (keydown)="onKeyDown($event)">
+                <ng-container *ngIf="!PortfolioState.isPending">
+                    <tr *ngFor="let buck of PortfolioState.BuckLites" (click)="selectBuck(buck)" [class.selected]="selectedBuck === buck" (keydown)="onKeyDown($event)">
                         <ng-container *ngIf="buck">
                             <td>
                                 <div class="checkbox-container">

@@ -164,8 +164,6 @@
             background-color: lightsteelblue;
         }
 
-// rgb(92 107 192); //purple
-// rgb(105 245 171); //green
         @keyframes slide {
             0% { transform: translateX(0px); background-color: rgb(105 245 171); }
             50% { transform: translateX(250px); background-color: lightsteelblue; }

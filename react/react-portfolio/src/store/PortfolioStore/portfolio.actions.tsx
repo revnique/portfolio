@@ -10,5 +10,5 @@ export const loadBuckLite = createAction(LoadBuckLite, (SN: string) => ({payload
 export const LoadBuckLiteSuccess = 'LoadBuckLiteSuccess';
 export const loadBuckLiteSuccess = createAction(LoadBuckLiteSuccess);
 
-export const IsPending = 'IsPending';
-export const isPending = createAction(IsPending, (isPending: boolean) => ({payload: isPending}));
+export const SetIsPending = 'SetIsPending';
+export const setIsPending = createAction(SetIsPending, (isPending: boolean) => ({payload: isPending}));
