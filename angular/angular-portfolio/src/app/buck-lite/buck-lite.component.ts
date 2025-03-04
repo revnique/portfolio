@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -13,15 +13,21 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import { PortfolioState } from '../../store/portfolio-store/portfolio.state';
 import { PortfolioActions, selectPortfolioState } from '../../store/portfolio-store/portfolio.actions';
-
+import { ValueBarComponent } from '../value-bar/value-bar.component';
 @Component({
     selector: 'app-buck-lite',
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule, ValueBarComponent],
     templateUrl: './buck-lite.component.html',
     styleUrl: './buck-lite.component.scss'
 })
 export class BuckLiteComponent implements OnInit {
   constructor(private store: Store<{ portfolio: PortfolioState }>) {}
+  @HostListener('window:resize', ['$event'])
+  mediaBreakpoint: string = 'desktop';
+
+  onResize(event: Event) {
+    this.setMediaBreakpoint();
+  }
   faTrash = faTrash;
   buckInputForm = new FormGroup({
     serialNumber: new FormControl('', [Validators.required, Validators.pattern(/^[a-lA-L]{1}\d{8}[a-np-yA-NP-Y*]{1}$/)]),
@@ -57,6 +63,7 @@ export class BuckLiteComponent implements OnInit {
   state$ = this.store.select(selectPortfolioState);
   state: PortfolioState | null = null;
   ngOnInit(): void {
+    this.setMediaBreakpoint();
     console.log('ngOnInit', this.state$);
     Amplify.configure(config as any);
     this.state$.subscribe((state: PortfolioState) => {
@@ -77,6 +84,13 @@ export class BuckLiteComponent implements OnInit {
     });
     this.buckInputForm.get('serialNumber')?.setValue('K77777773*');
     this.fetch();
+  }
+
+  setMediaBreakpoint() {
+    const width = window.innerWidth;
+    if (width < 768) this.mediaBreakpoint = 'mobile';
+    else if (width < 1024) this.mediaBreakpoint = 'tablet';
+    else this.mediaBreakpoint = 'desktop';
   }
 
   setMatches(match: Match) {
@@ -106,6 +120,7 @@ export class BuckLiteComponent implements OnInit {
           CDT: CDT,
           isFW: isFW,
           index: -1,
+          match: this.initialMatch,
         });
       }
     } catch (error) {
@@ -114,6 +129,7 @@ export class BuckLiteComponent implements OnInit {
         CDT: CDT,
         isFW: isFW,
         index: -1,
+        match: this.initialMatch,
       });
       console.log(error);
     }

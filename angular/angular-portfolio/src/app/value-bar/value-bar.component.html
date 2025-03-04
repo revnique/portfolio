@@ -1,0 +1,18 @@
+<div class="value-bar-container-wrapper-horizontal" *ngIf="isHorizontal">
+    <div class="value-bar-container" [style.width.px]="length" [style.height.px]="thickness">
+        <div class="value-bar-positive" [style.width.%]="valueBarPositiveHeight"></div>
+        <div class="value-bar-negative" [style.width.%]="valueBarNegativeHeight"></div>
+    </div>
+    <div class="value-bar-label">
+        <span>{{valueBarPositiveHeight}}</span>
+    </div>
+</div>
+<div class="value-bar-container-wrapper" *ngIf="!isHorizontal">
+    <div class="value-bar-container" [style.height.px]="length" [style.width.px]="thickness">
+        <div class="value-bar-negative" [style.height.%]="valueBarNegativeHeight" ></div>
+        <div class="value-bar-positive" [style.height.%]="valueBarPositiveHeight" ></div>
+    </div>
+    <div class="value-bar-label">
+        <span>{{valueBarPositiveHeight}}</span>
+    </div>
+</div>

@@ -19,24 +19,11 @@
                     </div>
                 </form>
                 <div class="slider-value-bar-container">
-                    <div class="value-bar-container-wrapper">
-                        <div class="value-bar-container">
-                            <div class="value-bar-negative" [style.height.%]="valueBarNegativeHeight"></div>
-                            <div class="value-bar-positive" [style.height.%]="valueBarPositiveHeight"></div>
-                        </div>
-                        <div class="value-bar-label">
-                            <span>{{valueBarPositiveHeight}}</span>
-                        </div>
+                    <div class="vertical">
+                        <app-value-bar [valueBarPositiveHeight]="valueBarPositiveHeight" [isHorizontal]="false" [length]="150" [thickness]="50"></app-value-bar>
                     </div>
-
-                    <div class="value-bar-container-wrapper-horizontal">
-                        <div class="value-bar-container">
-                            <div class="value-bar-positive" [style.width.%]="valueBarPositiveHeight"></div>
-                            <div class="value-bar-negative" [style.width.%]="valueBarNegativeHeight"></div>
-                        </div>
-                        <div class="value-bar-label">
-                            <span>{{valueBarPositiveHeight}}</span>
-                        </div>
+                    <div class="horizontal">
+                        <app-value-bar [valueBarPositiveHeight]="valueBarPositiveHeight" [isHorizontal]="true" [length]="150" [thickness]="50"></app-value-bar>
                     </div>
                 </div>
             </div>

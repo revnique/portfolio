@@ -23,6 +23,11 @@
                     <button type="button" (click)="fetchSingle()">Get 1</button>
                 </div>
             </form>
+            <div class="buck-value-container">
+                <div class="buck-value-label">Rating</div>
+                <app-value-bar [valueBarPositiveHeight]="selectedBuck?.match?.RatingValue || 1" [isHorizontal]="true" 
+                    [length]="mediaBreakpoint === 'mobile' ? 355 : 275" [thickness]="mediaBreakpoint === 'mobile' ? 20 : 30"></app-value-bar>
+            </div>
         </div>
         <div class="buck-list-container">
             <h1>Buck List</h1>
@@ -30,6 +35,7 @@
                 <tr>
                     <th>Serial Number</th>
                     <th>Date</th>
+                    <th>Rating</th>
                     <th></th>
                 </tr>
                 <tr *ngIf="PortfolioState.isPending">
@@ -50,6 +56,7 @@
                                 </div>
                             </td>
                             <td><label [for]="buck.SN">{{ buck.CDT | date:'MM/dd/yyyy' }}</label></td>
+                            <td class="align-right"><label [for]="buck.SN">{{ buck.match.RatingValue }}&nbsp;&nbsp;&nbsp;</label></td>
                             <td>
                                 <button (click)="delete(buck.SN)" class="delete-icon">
                                     <fa-icon [icon]="faTrash" class="delete-icon"></fa-icon>

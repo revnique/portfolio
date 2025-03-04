@@ -1,7 +1,7 @@
 import { PortfolioActions } from "./portfolio.actions";
 import { initialPortfolioState } from "./portfolio.state";
 import { createReducer, on } from "@ngrx/store";
-
+import { BuckLite, getMatches } from "../../app/buck-lite/buck-helper";
 export const portfolioReducer = createReducer(
     initialPortfolioState,
     on(PortfolioActions.loadBuckLites, (state) => ({
@@ -12,16 +12,25 @@ export const portfolioReducer = createReducer(
         ...state,
         isPending: true
     })),
-    on(PortfolioActions.loadBuckLitesSuccess, (state, action) => ({
+    on(PortfolioActions.loadBuckLitesSuccess, (state, action) => {
+        let buckLites = JSON.parse(JSON.stringify(action.buckLites));
+        buckLites.forEach((buckLite: BuckLite) => {
+            buckLite.match = getMatches(buckLite.SN);
+        }); 
+        return {
         ...state,
-        BuckLites: action.buckLites,
+        BuckLites: buckLites,
         isPending: false
-    })),
-    on(PortfolioActions.loadBuckLiteSuccess, (state, action) => ({
+    }}),
+    on(PortfolioActions.loadBuckLiteSuccess, (state, action) => {
+        let buckLite = JSON.parse(JSON.stringify(action.buckLite));
+        buckLite.match = getMatches(buckLite.SN);
+
+        return {
         ...state,
-        BuckLite: action.buckLite,
+        BuckLite: buckLite,
         isPending: false
-    })),
+    }}),
     on(PortfolioActions.setIsPending, (state, action) => ({
         ...state,
         isPending: action.isPending

@@ -6,8 +6,8 @@ export function getMatches(sn: string) {
     const justDigitsSerialNumber = sn.substring(1, 9);
     const sx = sn.substring(9);
     var IsStarNote = sx == '*';
-    checkMatches(justDigitsSerialNumber, rtn);
     rtn.IsStarNote = IsStarNote;
+    checkMatches(justDigitsSerialNumber, rtn);
     return rtn;
 }
 
@@ -30,6 +30,7 @@ function checkMatches(justDigitsSerialNumber: string, rtn: Match) {
     rtn.IsDateDate = getDate(justDigitsSerialNumber);
     rtn.IsEuroDate = patternIsEuroDate(justDigitsSerialNumber);
     rtn.IsEuroDateDate = getEuroDate(justDigitsSerialNumber);
+    rtn.RatingValue = getBuckValue(rtn);
     return rtn;
 }
 
@@ -334,6 +335,84 @@ function validateDateDigits(justDigitsSerialNumber: string, isEuro: boolean) {
     return false;
 }
 
+function getBuckValue(buckMatch: Match) {
+    var rtn = 0;
+    if (buckMatch.IsUniqueDigits) {
+        //rarity = 1814400;
+        rtn += 5;
+    }
+    if (buckMatch.IsDate) {
+        //rarity = 109938;
+        rtn += 5;
+    }
+    if (buckMatch.IsEuroDate) {
+        //rarity = 109938;
+        rtn += 5;
+    }
+    if (buckMatch.IsTwoDigits) {
+        //rarity = 11430;
+        rtn += 75;
+    }
+    if (buckMatch.IsRepeatingPairs4) {
+        //rarity = 10000;
+        rtn += 60;
+    }
+    if (buckMatch.IsAllPairs2) {
+        //rarity = 10000;
+        rtn += 60;
+    }
+    if (buckMatch.IsPalindrome) {
+        //rarity = 10000;
+        rtn += 80;
+    }
+    if (buckMatch.IsSixOrMoreSameDigit) {
+        //rarity = 2800;
+        rtn += 75;
+    }
+    if (buckMatch.IsRepeatingPairs2) {
+        //rarity = 100;
+        rtn += 75;
+    }
+    if (buckMatch.IsAllPairs4) {
+        //rarity = 100;
+        rtn += 75;
+    }
+    if (buckMatch.IsConsectutivePairDescending) {
+        //rarity = 97;
+        rtn += 85;
+    }
+    if (buckMatch.IsConsectutivePairAscending) {
+        //rarity = 97;
+        rtn += 85;
+    }
+    if (buckMatch.IsOneDigit) {
+        //rarity = 10;
+        rtn += 100;
+    }
+    if (buckMatch.IsConsectutiveAscending) {
+        //rarity = 3;
+        rtn += 100;
+    }
+    if (buckMatch.IsConsectutiveDescending) {
+        //rarity = 3;
+        rtn += 100;
+    }
+    if (buckMatch.IsStarNote) {
+        //rarity = 1000000;
+        //makes sure if it's only a star note that the value is only 5
+        var isStarNoteValue = rtn == 0 ? 5 : 10;
+        rtn += isStarNoteValue;
+    }
+
+    //can't be more than 100
+    rtn = rtn > 100 ? 100 : rtn;
+
+    //can't be less than 1
+    rtn = rtn < 1 ? 1 : rtn;
+
+    return rtn;
+}
+
 export class Match {
     IsAllPairs2: boolean = false;
     IsAllPairs4: boolean = false;
@@ -362,4 +441,5 @@ export interface BuckLite {
     CDT: string;
     isFW: boolean;
     index: number;
+    match: Match;
 }
