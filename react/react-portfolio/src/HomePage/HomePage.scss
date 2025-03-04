@@ -33,13 +33,14 @@
     }
 
     @media (max-width: 768px) {
+        height: auto;
         .content {
             display: block;
             .main-content {
-                width: 100%;
-                .content-container {
-                    flex-direction: column;
-                    padding: 0px;
+            width: 100%;
+            .content-container {
+                flex-direction: column;
+                padding: 0px;
                     gap: 0px;
                 }
             }

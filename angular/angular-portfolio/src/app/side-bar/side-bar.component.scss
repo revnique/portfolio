@@ -48,13 +48,14 @@
 
 @media (max-width: 768px) {
     .side-bar {
-        height: 200px;
+        height: auto;
         position: fixed;
         top: 41px;
         left: 0;
         z-index: 10;
         transition: margin-left 0.3s ease-in-out;
-        
+        border-right: 1px solid #555;
+        width: 150px;
         &.open {
             margin-left: 0;
         }
@@ -63,6 +64,7 @@
         }
         .side-bar-header {
             height: 20px;
+            width: 130px;
             font-size: 1rem;
             .fa-icon {
                 visibility: visible;
@@ -75,6 +77,10 @@
                     font-size: 1rem;
                 }
             }
+        }
+        @media (prefers-color-scheme: dark) {
+            border-right: 1px solid rgb(92 107 192);
+            border-bottom: 1px solid rgb(92 107 192);
         }
     }
 }

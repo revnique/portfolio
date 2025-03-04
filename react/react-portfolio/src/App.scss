@@ -85,4 +85,9 @@ body {
       background-color: transparent;
     }
   }
+  @media (max-width: 768px) {
+    html, body, #root {
+      background-color: #444;
+    }
+  }
 }
