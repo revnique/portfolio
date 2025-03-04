@@ -17,6 +17,8 @@ export default function Header() {
           window.location.href = 'http://localhost:5177/bucklite';
         } else if (page === 'components') {
           window.location.href = 'http://localhost:5177/components';
+        } else {
+          window.location.href = 'http://localhost:5177/';
         }
     }
     return (

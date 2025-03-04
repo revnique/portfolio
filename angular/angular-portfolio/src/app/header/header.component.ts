@@ -25,6 +25,9 @@ export class HeaderComponent {
       window.location.href = 'http://localhost:5173/bucklite';
     } else if (page === 'components') {
       window.location.href = 'http://localhost:5173/components';
+    } else {
+      window.location.href = 'http://localhost:5173/';
     }
   }
 }
+
