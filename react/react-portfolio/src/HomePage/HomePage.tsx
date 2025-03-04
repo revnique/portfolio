@@ -5,6 +5,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Header from '../Header/Header';
 import SideBar from '../SideBar/SideBar';
+import DefaultPage from '../DefaultPage/DefaultPage';
 library.add(faMoneyBill, faCode, faClose, faBars);
 
 export function HomePage() {
@@ -15,7 +16,7 @@ export function HomePage() {
             <SideBar />
             <div className="main-content">
                 <QueryClientProvider client={queryClient}>
-                    <Outlet />
+                    {window.location.pathname === '/' ? <DefaultPage /> : <Outlet />}
                 </QueryClientProvider>
             </div>
         </div>
