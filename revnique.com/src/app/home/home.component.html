@@ -1,0 +1,21 @@
+<div class="main-container">
+    <div *ngIf="projects$ | async as projects">
+        <div *ngFor="let proj of projects" class="project-container">
+            <div class="title">{{proj.name}}</div>
+            <a [href]="proj.projectUrl" target="_blank">
+                <img [src]="proj.image" />
+            </a>
+            <div class="comments">
+                {{proj.comment}}
+            </div>
+            <div style="text-align: center;">
+                <div class="tech-list">
+                    <span>&bull;</span>
+                    <span *ngFor="let tech of proj.techList">
+                        &nbsp;{{tech}} &bull;
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
