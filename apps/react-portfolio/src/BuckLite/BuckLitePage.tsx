@@ -1,5 +1,5 @@
 import './BuckLitePage.scss';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { getMatches } from './buck-helper';
 import { format } from 'date-fns';
@@ -127,7 +127,7 @@ export default function BuckLitePage() {
         },
         // If the mutation fails, use the context we returned above
         onError: (err, newBuckLite, context) => {
-            console.log('this is the error', err);
+            console.log('this is the error', err, newBuckLite);
             queryClient.setQueryData(
                 ['addBuckLite', context?.newBuckLite.SN],
                 context?.previousBuckLite,
@@ -203,6 +203,7 @@ export default function BuckLitePage() {
     }
 
     const setMatches = (match: Match) => {
+        console.log('setMatches', match);
     }
   
     const fetch = async () => {

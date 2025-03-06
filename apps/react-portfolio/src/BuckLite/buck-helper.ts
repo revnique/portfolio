@@ -235,7 +235,7 @@ function patternSixOrMoreSameDigit(justDigitsSerialNumber: string) {
 // H12222221T
 function patternInARowCount(justDigitsSerialNumber: string) {
     const digits = justDigitsSerialNumber.split("");
-    var digitsObj = {};
+    //var digitsObj = {};
     var champion = '';
     var rtn = 0;
     var winCount = 0;
