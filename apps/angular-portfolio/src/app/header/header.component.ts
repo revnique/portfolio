@@ -21,12 +21,13 @@ export class HeaderComponent {
 
   gotoReact() {
     const page = window.location.href.split('/')[3];
+    const url = window.location.href.includes('localhost') ? 'http://localhost:5173' : 'https://react.revnique.com';
     if (page === 'bucklite') {
-      window.location.href = 'http://localhost:5173/bucklite';
+      window.location.href = `${url}/bucklite`;
     } else if (page === 'components') {
-      window.location.href = 'http://localhost:5173/components';
+      window.location.href = `${url}/components`;
     } else {
-      window.location.href = 'http://localhost:5173/';
+      window.location.href = `${url}/`;
     }
   }
 }

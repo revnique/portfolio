@@ -1,19 +1,73 @@
 version: 1
-frontend:
-  phases:
-    preBuild:
-      commands:
-        - nvm install 20.12.2
-        - nvm use 20.12.2
-        - npm install -g pnpm
-        - pnpm install
-    build:
-      commands:
-        - pnpm run build
-  artifacts:
-    baseDirectory: dist
-    files:
-      - '**/*'
-  cache:
-    paths:
-      - node_modules/**/*
+applications:
+    -
+        backend:
+            phases:
+                build:
+                    commands: ['# Execute Amplify CLI with the helper script', 'amplifyPush --simple']
+        frontend:
+            phases:
+                preBuild:
+                    commands: 
+                      - nvm install 20.12.2
+                      - nvm use 20.12.2
+                      - npm install -g pnpm
+                      - pnpm install
+                build:
+                    commands: ['pnpm run build']
+            artifacts:
+                baseDirectory: apps/revnique.com/dist/
+                files:
+                    - '**/*'
+            cache:
+                paths:
+                    - '.npm/**/*'
+            buildPath: /
+        appRoot: apps/revnique.com
+
+version: 1
+applications:
+  - appRoot: apps/react-portfolio
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - nvm install 20.12.2
+            - nvm use 20.12.2
+            - npm install -g pnpm
+            - pnpm install
+            - npm install
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        files:
+          - "**/*"
+        discard-paths: yes
+        baseDirectory: dist
+
+
+version: 1
+applications:
+  - appRoot: apps/angular-portfolio
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - nvm install 20.12.2
+            - nvm use 20.12.2
+            - npm install -g @angular/cli
+            - npm install -g pnpm
+            - pnpm install
+            - npm install
+        build:
+          commands:
+            - ng build
+      artifacts:
+        files:
+          - '**/*'
+        discard-paths: yes
+        baseDirectory: dist/angular-portfolio/browser
+
+
+
