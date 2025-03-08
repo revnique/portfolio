@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {    
-    "start:revnique": "pnpm --filter revnique-web start", 
     "start:react": "pnpm --filter react-portfolio dev",
     "start:angular": "pnpm --filter angular-portfolio start",
     "start": "pnpm run start:revnique & pnpm run start:react & pnpm run start:angular",
