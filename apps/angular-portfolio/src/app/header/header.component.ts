@@ -21,7 +21,7 @@ export class HeaderComponent {
 
   gotoReact() {
     const page = window.location.href.split('/')[3];
-    const url = window.location.href.includes('localhost') ? 'http://localhost:5173' : 'https://react.revnique.com';
+    const url = window.location.href.includes('localhost') ? 'http://localhost:5173' : 'https://react.revnique.works';
     if (page === 'bucklite') {
       window.location.href = `${url}/bucklite`;
     } else if (page === 'components') {

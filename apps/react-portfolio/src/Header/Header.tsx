@@ -13,7 +13,7 @@ export default function Header() {
     }
     const gotToAngular = () => {
         const page = window.location.href.split('/')[3];
-        const url = window.location.href.includes('localhost') ? 'http://localhost:5177' : 'https://angular.revnique.com';
+        const url = window.location.href.includes('localhost') ? 'http://localhost:5177' : 'https://angular.revnique.works';
         if (page === 'bucklite') {
           window.location.href = `${url}/bucklite`;
         } else if (page === 'components') {
