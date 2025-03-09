@@ -2,11 +2,11 @@ import './SideBar.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faMoneyBill, faCode, faClose, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faMoneyBill, faCode, faClose, faBars, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSideBar as toggleSideBarAction } from '../store/root.actions';
 import { RootState } from '../store/root.state';
-library.add(faMoneyBill, faCode, faClose, faBars);
+library.add(faMoneyBill, faCode, faClose, faBars, faGlobe);
 
 export default function SideBar() {
     const dispatch = useDispatch();
@@ -14,6 +14,11 @@ export default function SideBar() {
     const sideBarOpen = state.sidebarState.sidebarIsOpen;
     const toggleSideBar = () => {
         dispatch(toggleSideBarAction());
+    }
+    const isLocalhost = window.location.href.indexOf('http://localhost:') === 0;
+    const homeUrl = isLocalhost ? 'http://localhost:37777' : 'https://revnique.works';
+    const goToHome = () => {
+        window.location.href = `${homeUrl}/`;
     }
     
     return (
@@ -23,6 +28,10 @@ export default function SideBar() {
             <li><NavLink to="/bucklite" className={({ isActive }) => isActive ? 'selected' : ''}><FontAwesomeIcon className="fa-icon" icon="money-bill" /> BuckLite</NavLink></li>
             <li><NavLink to="/components" className={({ isActive }) => isActive ? 'selected' : ''}><FontAwesomeIcon className="fa-icon" icon="code" /> Components</NavLink></li>
         </ul>
+        <div className="side-bar-footer" onClick={goToHome}>
+            <FontAwesomeIcon className="fa-icon" icon="globe" />
+            <a href={homeUrl}>https://revnique.works</a>
+        </div>
     </div>
     )
 }

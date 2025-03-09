@@ -239,7 +239,7 @@ function patternInARowCount(justDigitsSerialNumber: string) {
     var champion = '';
     var rtn = 0;
     var winCount = 0;
-    var winner = '';
+    //var winner = '';
     for (let i = 0; i < digits.length; i++) {
         const challenger = digits[i].toString();
         if (challenger !== champion) {
@@ -248,7 +248,7 @@ function patternInARowCount(justDigitsSerialNumber: string) {
         } else {
             winCount += 1;
             if (winCount > rtn) {
-                winner = champion;
+                //winner = champion;
                 rtn = winCount;
             }
         }

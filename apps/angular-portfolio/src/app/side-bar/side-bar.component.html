@@ -4,4 +4,8 @@
         <li><a routerLink="/bucklite" routerLinkActive="selected"><fa-icon class="fa-icon" [icon]="faMoneyBill" /> BuckLite</a></li>
         <li><a routerLink="/components" routerLinkActive="selected"><fa-icon class="fa-icon" [icon]="faCode" /> Components</a></li>
     </ul>
+    <div class="side-bar-footer" (click)="goToHome()">
+        <fa-icon class="fa-icon" [icon]="faGlobe" />
+        <a [href]="homeUrl">https://revnique.works</a>
+    </div>
 </div>

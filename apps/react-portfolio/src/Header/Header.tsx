@@ -5,7 +5,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 library.add(faBars, faHome);
 import { useDispatch } from 'react-redux';
 import { toggleSideBar as toggleSideBarAction } from '../store/root.actions';
-
+import { NavLink } from 'react-router';
 export default function Header() {
     const dispatch = useDispatch();
     const toggleSideBar = () => {
@@ -14,7 +14,6 @@ export default function Header() {
     const page = window.location.href.split('/')[3];
     const isLocalhost = window.location.href.indexOf('http://localhost:') === 0;
     const url = isLocalhost ? 'http://localhost:5177' : 'https://angular.revnique.works';
-    const homeUrl = isLocalhost ? 'http://localhost:37777' : 'https://revnique.works';
     const gotToAngular = () => {
         if (page === 'bucklite') {
           window.location.href = `${url}/bucklite`;
@@ -24,15 +23,12 @@ export default function Header() {
           window.location.href = `${url}/`;
         }
     }
-    const goToHome = () => {
-        window.location.href = `${homeUrl}/`;
-    }
     return (
         <div className="header">
             <div className="side-bar-toggle" onClick={toggleSideBar}><FontAwesomeIcon className="fa-icon" icon={faBars} /></div>
             <div className="header-left">
-                <div className="home-link" onClick={goToHome}>
-                    <a href={homeUrl}><FontAwesomeIcon className="fa-icon" icon={faHome} /></a>
+                <div className="home-link">
+                    <NavLink to="/"><FontAwesomeIcon className="fa-icon" icon={faHome} /></NavLink>
                 </div>
                 <div className="header-title">
                     <h1>React Portfolio</h1>

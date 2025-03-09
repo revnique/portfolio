@@ -4,10 +4,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { RootActions } from '../../store/root.actions';
-
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-header',
-  imports: [FontAwesomeModule, CommonModule],
+  imports: [FontAwesomeModule, CommonModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
