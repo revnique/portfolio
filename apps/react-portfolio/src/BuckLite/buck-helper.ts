@@ -253,7 +253,7 @@ function patternInARowCount(justDigitsSerialNumber: string) {
             }
         }
     }
-    console.log(`winner ${winner}, winnerCount ${rtn}`);
+    //console.log(`winner ${winner}, winnerCount ${rtn}`);
     return rtn > 1 ? rtn + 1 : rtn;
 }
 
