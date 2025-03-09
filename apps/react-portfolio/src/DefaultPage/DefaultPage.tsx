@@ -7,7 +7,7 @@ export default function DefaultPage() {
         <div className="default-page">
             <div className="default-page-content">
                 <div className="default-page-content-container">
-                    <div>
+                    <div className="inner-container">
                         <div className="default-page-title">This website demonstrates</div>
                         <ul>
                             <li>&mdash;&nbsp;React 18 with Redux state management</li>

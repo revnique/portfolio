@@ -65,3 +65,69 @@
         }
     }
 }
+
+
+@media (max-width: 768px) {
+    .default-page {
+        .default-page-content {
+            width: 80%;
+            padding: 15px 0px 0px 25px;
+            box-sizing: border-box;
+            font-size: .5em;
+            display: flex;
+            flex-direction: column;
+
+            .default-page-content-container {
+                padding: 0px;
+                display: flex;
+                flex-direction: column;
+
+                .inner-container {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    .default-page-title {
+                        font-size: 1.8em;
+                        font-weight: bold;
+                        margin-bottom: 5px;
+                        text-align: center;
+                        width: 100%;
+                    }
+
+                    ul {
+                        padding: 0;
+                        margin: 0px 0px 0px 0px;
+                        width: 100%;
+                        font-size: 1.5em;
+
+                        .external-link-container {
+                            margin: 10px 0px 0px 0px;
+                        }
+
+                        .external-link-text {
+                            font-size: 0.5em;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        .hand-icon-container {
+            padding: 0px 0px 0px 0px;
+            font-size: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            .svg-inline--fa.fa-hand-point-up.hand-icon{
+                margin-right: 10px;
+            }
+
+            .hand-icon-text {
+                font-size: 9px;
+                margin-top: 5px;
+            }
+        }
+    }
+}
