@@ -10,13 +10,16 @@ library.add(faMoneyBill, faCode, faClose, faBars);
 
 export function HomePage() {
     const queryClient = new QueryClient();
+    const isLocalhost = window.location.href.indexOf('http://localhost:') === 0;
+    const isRoot = (isLocalhost && window.location.href === 'http://localhost:5173/') || (!isLocalhost && window.location.href === 'https://react.revnique.works/');
     return <div className="home-page-container">
         <Header />
         <div className="content">
             <SideBar />
             <div className="main-content">
                 <QueryClientProvider client={queryClient}>
-                    {window.location.pathname === '/' ? <DefaultPage /> : <Outlet />}
+                    {/* <h1>isRoot: {isRoot.toString()}</h1> */}
+                    {isRoot ? <DefaultPage /> : <Outlet />}
                 </QueryClientProvider>
             </div>
         </div>
