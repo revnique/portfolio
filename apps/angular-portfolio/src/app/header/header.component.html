@@ -2,7 +2,12 @@
 <div class="header">
     <div class="side-bar-toggle" (click)="toggleSideBar()"><fa-icon class="fa-icon" [icon]="faBars" /></div>
     <div class="header-left">
-        <h1>Angular Portfolio</h1>
+        <div class="home-link" (click)="goToHome()">
+            <a [href]="homeUrl"><fa-icon class="fa-icon" [icon]="faHome" /></a>
+        </div>
+        <div class="header-title">
+            <h1>Angular Portfolio</h1>
+        </div>
     </div>
     <div class="header-right">
         <div class="logo-container">

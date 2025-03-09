@@ -1,8 +1,8 @@
 import './Header.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faHome } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-library.add(faBars);
+library.add(faBars, faHome);
 import { useDispatch } from 'react-redux';
 import { toggleSideBar as toggleSideBarAction } from '../store/root.actions';
 
@@ -11,9 +11,11 @@ export default function Header() {
     const toggleSideBar = () => {
         dispatch(toggleSideBarAction());
     }
+    const page = window.location.href.split('/')[3];
+    const isLocalhost = window.location.href.indexOf('http://localhost:') === 0;
+    const url = isLocalhost ? 'http://localhost:5177' : 'https://angular.revnique.works';
+    const homeUrl = isLocalhost ? 'http://localhost:37777' : 'https://revnique.works';
     const gotToAngular = () => {
-        const page = window.location.href.split('/')[3];
-        const url = window.location.href.includes('localhost') ? 'http://localhost:5177' : 'https://angular.revnique.works';
         if (page === 'bucklite') {
           window.location.href = `${url}/bucklite`;
         } else if (page === 'components') {
@@ -22,11 +24,19 @@ export default function Header() {
           window.location.href = `${url}/`;
         }
     }
+    const goToHome = () => {
+        window.location.href = `${homeUrl}/`;
+    }
     return (
         <div className="header">
-            <div className="side-bar-toggle" onClick={toggleSideBar}><FontAwesomeIcon className="fa-icon" icon="bars" /></div>
+            <div className="side-bar-toggle" onClick={toggleSideBar}><FontAwesomeIcon className="fa-icon" icon={faBars} /></div>
             <div className="header-left">
-                <h1>React Portfolio</h1>
+                <div className="home-link" onClick={goToHome}>
+                    <a href={homeUrl}><FontAwesomeIcon className="fa-icon" icon={faHome} /></a>
+                </div>
+                <div className="header-title">
+                    <h1>React Portfolio</h1>
+                </div>
             </div>
             <div className="header-right">
                 <div className="logo-container selected">

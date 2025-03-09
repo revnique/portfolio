@@ -6,6 +6,33 @@
     .header-left {
         text-align: center;
         width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        .header-title {
+            width: 100%;
+            text-align: center;
+        }
+        .home-link {
+            height: 82px;
+            width: 70px;
+            font-size: 1.7rem;
+            a {
+                background-color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                width: 100%;
+                padding: 5px;
+                &:hover {
+                    cursor: pointer;
+                    background-color: #eee !important;
+                    border-right: 1px solid #ccc;
+                }
+            }
+        }
     }
     .header-right {
         display: flex;
@@ -70,12 +97,22 @@
 @media (prefers-color-scheme: dark) {
     .header {
         background-color: #333;
+        .header-left {
+            .home-link {
+                a {
+                    background-color: #444;
+                    color: #fff !important;
+                    &:hover {
+                        background-color: #333 !important;
+                    }
+                }
+            }
+        }
         .header-right {
             :hover {
                 cursor: pointer;
                 background-color: #444 !important;
             }
-
             .selected {
                 background-color: #444 !important;
             }

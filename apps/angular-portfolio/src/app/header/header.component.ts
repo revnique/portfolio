@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faBars, faClose } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faClose, faHome } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
@@ -14,9 +14,17 @@ import { RootActions } from '../../store/root.actions';
 export class HeaderComponent {
   faBars = faBars;
   faClose = faClose;
+  faHome = faHome;
+  isLocalhost = window.location.href.indexOf('http://localhost:') === 0;
+  url = this.isLocalhost ? 'http://localhost:5177' : 'https://angular.revnique.works';
+  homeUrl = this.isLocalhost ? 'http://localhost:37777' : 'https://revnique.works';
   constructor(private store: Store) {}
   toggleSideBar() {
     this.store.dispatch(RootActions.toggleSideBar());
+  }
+
+  goToHome() {
+    window.location.href = this.homeUrl;
   }
 
   gotoReact() {
