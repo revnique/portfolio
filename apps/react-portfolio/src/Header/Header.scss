@@ -71,6 +71,22 @@
         }
         .header-left {
             width: 100%;
+            .home-link {
+                height: 40px;
+                width: 20px;
+                font-size: 1.1rem;
+                a {
+                    background-color: #fff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 50px;
+                    width: 100%;
+                    margin: 0;
+                    padding: 5px 15px 15px 15px;
+                    box-sizing: border-box;
+                }
+            }
         }
         .header-right {
             width: 50px;
