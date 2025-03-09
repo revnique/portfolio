@@ -26,7 +26,7 @@ export default function Header() {
         <div className="header">
             <div className="side-bar-toggle" onClick={toggleSideBar}><FontAwesomeIcon className="fa-icon" icon="bars" /></div>
             <div className="header-left">
-                <h1>Revnique's React Portfolio</h1>
+                <h1>React Portfolio</h1>
             </div>
             <div className="header-right">
                 <div className="logo-container selected">
