@@ -21,6 +21,27 @@
             .summary {
                 text-align: center;
                 padding: 5px 15px;
+                h1 {
+                    margin: 10px 0px 10px 0px;
+                    padding: 0px;
+                }
+                .summary-subheader {
+                    font-size: 1.2rem;
+                    margin: 0px 0px 10px 0px;
+                }
+                .summary-text {
+                    font-size: 1rem;
+                    margin: 0px 0px 10px 0px;
+                    .summary-subheader-link {
+                        cursor: pointer;
+                    }
+                    &.show {
+                        display: block;
+                    }
+                    &.hide {
+                        display: none;
+                    }
+                }
             }
             .content-container {
                 padding: 25px;
@@ -37,11 +58,26 @@
         .content {
             display: block;
             .main-content {
-            width: 100%;
-            .content-container {
-                flex-direction: column;
-                padding: 0px;
+                width: 100%;
+                .content-container {
+                    flex-direction: column;
+                    padding: 0px;
                     gap: 0px;
+                }
+                .summary {
+                    padding: 5px 15px;
+                    h1 {
+                        margin: 0px 0px 0px 0px;
+                        padding: 0px;
+                    }
+                    .summary-subheader {
+                        font-size: 1rem;
+                        margin: 0px 0px 10px 0px;
+                    }
+                    .summary-text {
+                        font-size: .8rem;
+                        margin: 0px 0px 10px 0px;
+                    }
                 }
             }
         }

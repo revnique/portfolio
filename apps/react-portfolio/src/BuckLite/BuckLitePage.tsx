@@ -8,9 +8,9 @@ import { useEffect } from 'react';
 import { Amplify } from 'aws-amplify';  
 import { generateClient } from "aws-amplify/api";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faCheckSquare, faSquare } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faCheckSquare, faSquare, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-library.add(faTrash, faCheckSquare, faSquare);
+library.add(faTrash, faCheckSquare, faSquare, faCaretUp, faCaretDown);
 import { useSelector } from 'react-redux';
 import { PortfolioState } from '../store/PortfolioStore/portfolio.state';
 import { setIsPending, loadBuckLite, loadBuckLites } from '../store/PortfolioStore/portfolio.actions';
@@ -262,13 +262,22 @@ export default function BuckLitePage() {
         serialNumberChange(val);
         fetch();
     }, []);
+    const [showSummary, setShowSummary] = useState(false);
+
+    const toggleSummary = () => {
+        setShowSummary(!showSummary);
+    }
 
     return (
         <>
             <div className="main-content-header">
                 <div className="summary">
-                    <h1>BuckLite</h1>
-                    <p>BuckLite is a simple budgeting app that allows you to track your income and expenses.</p>
+                    <h1>BuckLite Page</h1>
+                    <div className="summary-subheader">(dollar serial numbers) <span className="summary-subheader-link" onClick={toggleSummary}><FontAwesomeIcon icon={showSummary ? "caret-up" : "caret-down"} /></span></div>
+                    <div className={`summary-text ${showSummary ? 'show' : 'hide'}`}>
+                        Every one dollar bill has a serial number. This page allows you to analyze the serial numbers of one dollar bills. Depending on the serial number, it will be rated from 1 to 100. 
+                        The rating is based on the serial number's pattern and the date it was created. For instance <span className="bold">K77777777*</span> is a 100 rating because it is very rare with the same digit repeated 7 times in a row and it's also a Star Note meaning it ends in a star (*)
+                    </div>
                 </div>
             </div>
             <div className="main-content-body">

@@ -9,7 +9,7 @@ import { generateClient } from 'aws-amplify/api';
 import { getMatches, Match, BuckLite } from './buck-helper';
 import { injectMutation, QueryClient } from '@tanstack/angular-query-experimental';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import { PortfolioState } from '../../store/portfolio-store/portfolio.state';
 import { PortfolioActions, selectPortfolioState } from '../../store/portfolio-store/portfolio.actions';
@@ -21,6 +21,7 @@ import { ValueBarComponent } from '../value-bar/value-bar.component';
     styleUrl: './buck-lite.component.scss'
 })
 export class BuckLiteComponent implements OnInit {
+  showSummary = false;
   constructor(private store: Store<{ portfolio: PortfolioState }>) {}
   @HostListener('window:resize', ['$event'])
   mediaBreakpoint: string = 'desktop';
@@ -29,6 +30,8 @@ export class BuckLiteComponent implements OnInit {
     this.setMediaBreakpoint();
   }
   faTrash = faTrash;
+  faCaretUp = faCaretUp;
+  faCaretDown = faCaretDown;
   buckInputForm = new FormGroup({
     serialNumber: new FormControl('', [Validators.required, Validators.pattern(/^[a-lA-L]{1}\d{8}[a-np-yA-NP-Y*]{1}$/)]),
     createDate: new FormControl('', [Validators.required]),
@@ -94,6 +97,10 @@ export class BuckLiteComponent implements OnInit {
   }
 
   setMatches(match: Match) {
+  }
+
+  toggleSummary() {
+    this.showSummary = !this.showSummary;
   }
 
   checkSerial(sn: string) {
