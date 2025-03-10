@@ -22,6 +22,7 @@ import { ValueBarComponent } from '../value-bar/value-bar.component';
 })
 export class BuckLiteComponent implements OnInit {
   showSummary = false;
+  errorMessage = '';
   constructor(private store: Store<{ portfolio: PortfolioState }>) {}
   @HostListener('window:resize', ['$event'])
   mediaBreakpoint: string = 'desktop';
@@ -74,14 +75,14 @@ export class BuckLiteComponent implements OnInit {
     });
     this.buckInputForm.get('createDate')?.setValue(new Date('2024-11-11').toISOString().slice(0, 10));
     this.buckInputForm.get('serialNumber')?.valueChanges.subscribe((val: string | null) => {
+      this.errorMessage = '';
       if (val) {
         const serialIsValid = this.checkSerial(val);
         if (serialIsValid) {
           const match = getMatches(val);
-          console.log(val, match);
-          this.setMatches(match);
         } else {
-          this.setMatches(this.initialMatch);
+          this.selectedBuck = null;
+          this.errorMessage = 'Invalid serial number';
         }
       }
     });
@@ -94,9 +95,6 @@ export class BuckLiteComponent implements OnInit {
     if (width < 768) this.mediaBreakpoint = 'mobile';
     else if (width < 1024) this.mediaBreakpoint = 'tablet';
     else this.mediaBreakpoint = 'desktop';
-  }
-
-  setMatches(match: Match) {
   }
 
   toggleSummary() {
@@ -282,6 +280,21 @@ export class BuckLiteComponent implements OnInit {
     },
 
   }));
+
+  onSerialNumberInput(event: any, sn: HTMLInputElement) {
+    if (sn.value.length === 10 && this.checkSerial(sn.value)) {
+      const currentBuck = {
+        SN: sn.value,
+        CDT: this.buckInputForm.get('createDate')?.value!,
+        isFW: this.buckInputForm.get('isFortWorth')?.value!,
+        index: -1,
+        match: getMatches(sn.value),
+      };
+      this.selectedBuck = currentBuck;
+    } else {
+      this.selectedBuck = null;
+    }
+  }
 
   onKeyDown(event: KeyboardEvent) {
     console.log('onKeyDown', event.key);

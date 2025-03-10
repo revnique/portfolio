@@ -7,8 +7,17 @@ export function getMatches(sn: string) {
     const sx = sn.substring(9);
     var IsStarNote = sx == '*';
     rtn.IsStarNote = IsStarNote;
-    checkMatches(justDigitsSerialNumber, rtn);
+    const isValidSerialNumber = checkSerial(sn);
+    if (isValidSerialNumber) {
+        checkMatches(justDigitsSerialNumber, rtn);
+    }
     return rtn;
+}
+
+export function checkSerial(sn: string) {
+    var pattern = new RegExp(/^[a-lA-L]{1}\d{8}[a-np-yA-NP-Y*]{1}$/);
+    var isMatch = pattern.test(sn);
+    return isMatch;
 }
 
 function checkMatches(justDigitsSerialNumber: string, rtn: Match) {

@@ -37,6 +37,23 @@
     }
 }
 
+.form-field {
+    text-transform: uppercase;
+}
+
+.error-message {
+    color: #990000;
+    font-size: 1em;
+    margin: -10px 10px 10px 10px;
+    font-style: italic;
+    &.show {
+        display: block;
+    }
+    &.hide {
+        display: none;
+    }
+}
+
 .buck-list-container {
     width: 300px;
     margin: 0 25px;
@@ -183,6 +200,10 @@
             50% { transform: translateX(250px); background-color: lightsteelblue; }
             100% { transform: translateX(0px); background-color: rgb(92 107 192); }
         }
+    }
+
+    .error-message {
+        color: #a66464;
     }
 }
 

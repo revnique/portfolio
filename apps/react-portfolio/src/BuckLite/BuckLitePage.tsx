@@ -17,6 +17,7 @@ import { setIsPending, loadBuckLite, loadBuckLites } from '../store/PortfolioSto
 import { useDispatch } from 'react-redux';
 import ValueBar from '../ValueBar/ValueBar';
 import { useBreakpoint } from '../services/PortfolioService';
+import { checkSerial } from './buck-helper';
 // @ts-ignore
 import config from '../aws-exports';
 Amplify.configure(config as any);
@@ -33,13 +34,23 @@ export default function BuckLitePage() {
     const breakpoint = useBreakpoint();
     const handleSerialNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         serialNumberChange(event.target.value);
+        const currentBuck = {
+            SN: event.target.value,
+            CDT: createDate,
+            isFW: isFortWorth,
+            index: -1,
+            match: getMatches(event.target.value),
+        };
+        setSelectedBuck(currentBuck);
     }
     const serialNumberChange = (val: string) => {
         if (checkSerial(val)) {
             const match = getMatches(val);
             setMatches(match);
+            setErrorMessage('');
         } else {
             setMatches(initialMatch);
+            setErrorMessage('Invalid serial number');
         }
         setSerialNumber(val);
     }
@@ -196,12 +207,6 @@ export default function BuckLitePage() {
         RatingValue: 0
     };
 
-    const checkSerial = (sn: string) => {
-        var pattern = new RegExp(/^[a-lA-L]{1}\d{8}[a-np-yA-NP-Y*]{1}$/);
-        var isMatch = pattern.test(sn);
-        return isMatch;
-    }
-
     const setMatches = (match: Match) => {
         console.log('setMatches', match);
     }
@@ -267,6 +272,7 @@ export default function BuckLitePage() {
     const toggleSummary = () => {
         setShowSummary(!showSummary);
     }
+    const [errorMessage, setErrorMessage] = useState('');
 
     return (
         <>
@@ -287,7 +293,10 @@ export default function BuckLitePage() {
                         <form className="form-container">
                             <div className="form-group">
                                 <label htmlFor="serialNumber">Serial Number</label>
-                                <input type="text" className="form-field" onChange={handleSerialNumberChange} value={serialNumber} />
+                                <input type="text" className="form-field" maxLength={10} onChange={handleSerialNumberChange} value={serialNumber} />
+                            </div>
+                            <div className={`error-message ${errorMessage !== '' ? 'show' : 'hide'}`}>
+                                {errorMessage}
                             </div>
                             <div className="form-group">
                                 <label htmlFor="createDate">Create Date</label>

@@ -15,7 +15,10 @@
             <form class="form-container" [formGroup]="buckInputForm">
                 <div class="form-group">
                     <label htmlFor="serialNumber">Serial Number</label>
-                    <input type="text" class="form-field" formControlName="serialNumber" />
+                    <input type="text" class="form-field" [maxLength]="10" formControlName="serialNumber" #sn (input)="onSerialNumberInput($event, sn)" />
+                </div>
+                <div class="error-message" [ngClass]="{'show': errorMessage !== '', 'hide': errorMessage === ''}">
+                    {{errorMessage}}
                 </div>
                 <div class="form-group">
                     <label htmlFor="createDate">Create Date</label>
