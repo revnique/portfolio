@@ -86,7 +86,7 @@ export class BuckLiteComponent implements OnInit {
         }
       }
     });
-    this.buckInputForm.get('serialNumber')?.setValue('K77777773*');
+    this.buckInputForm.get('serialNumber')?.setValue('A01233210A');
     this.fetch();
   }
 

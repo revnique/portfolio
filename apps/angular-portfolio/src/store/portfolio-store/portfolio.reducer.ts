@@ -23,8 +23,11 @@ export const portfolioReducer = createReducer(
         isPending: false
     }}),
     on(PortfolioActions.loadBuckLiteSuccess, (state, action) => {
+        console.log('loadBuckLiteSuccess', action, state);
         let buckLite = JSON.parse(JSON.stringify(action.buckLite));
-        buckLite.match = getMatches(buckLite.SN);
+        if (buckLite){
+            buckLite.match = getMatches(buckLite.SN);
+        }
 
         return {
         ...state,

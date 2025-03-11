@@ -262,7 +262,7 @@ export default function BuckLitePage() {
         fetch();
     }
     useEffect(() => {
-        const val = 'K77777773*';
+        const val = 'A01233210A';
         setCreateDate(new Date('11/11/2024').toISOString().split('T')[0]);
         serialNumberChange(val);
         fetch();
