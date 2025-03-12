@@ -32,32 +32,12 @@ export class RevniqueCalendarComponent implements OnInit {
   daysInMonth = (year:number, month:number) => new Date(year, month, 0).getDate();
   daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday' ];
 
-  data = {
-    rows: [
-      {
-        id: 1,
-        name: 'aaa',
-        val: 'a'
-      },
-      {
-        id: 2,
-        name: 'bbb',
-        val: 'b'
-      },
-      {
-        id: 3,
-        name: 'ccc',
-        val: 'c'
-      },
-    ]
-  }
-
   constructor() { }
 
   ngOnInit(): void {
     this.generateCalendar(new Date());
-
   }
+  
   generateCalendar(d: Date){ 
     this.calInfo.currentDate = d;
     console.log("generateCalendar", d);

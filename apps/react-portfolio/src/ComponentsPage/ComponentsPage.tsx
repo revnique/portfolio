@@ -1,6 +1,7 @@
 import { useState } from "react";
 import './ComponentsPage.scss';
 import ValueBar from "../ValueBar/ValueBar";
+import RevniqueCalendar from "../RevniqueCalendar/RevniqueCalendar";
 export default function ComponentsPage() {
     const [valueBarPositiveHeight, setValueBarPositiveHeight] = useState(70);
     
@@ -37,6 +38,12 @@ export default function ComponentsPage() {
                                     <ValueBar valueBarPositiveHeight={valueBarPositiveHeight} isHorizontal={true} length={150} thickness={50} />
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div className="section">
+                        <h2>Calendar</h2>
+                        <div className="calendar-container">
+                            <RevniqueCalendar />
                         </div>
                     </div>
                 </div>
