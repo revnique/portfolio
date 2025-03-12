@@ -40,8 +40,13 @@
 @media (max-width: 768px) {
     ::ng-deep .content-container {
         align-items: center;
+        :last-child.section {
+            padding: 0px;
+        }
     }
     .section {
-        margin: 10px;
+        padding: 10px;
+        margin: 10px 0px 10px 0px;
+        
     }
 }

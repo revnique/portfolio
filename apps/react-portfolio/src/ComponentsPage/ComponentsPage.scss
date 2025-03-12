@@ -34,6 +34,11 @@
 @media (max-width: 768px) {
     .content-container {
         align-items: center;
+        :last-child.section {
+            h2 {
+                margin-top: 10px;
+            }
+        }
     }
     .section {
         padding: 10px;
