@@ -154,5 +154,23 @@ export default function RevniqueCalendar() {
                 ))}
             </div>
         </div>
+        <div className="legend-section">
+            <div className="legend-cell">
+                <div className="legend-color today-day">&nbsp;</div>
+                <div className="legend-label">Today</div>
+            </div>
+            <div className="legend-cell">
+                <div className="legend-color red-day">&nbsp;</div>
+                <div className="legend-label">Red</div>
+            </div>
+            <div className="legend-cell">
+                <div className="legend-color orange-day">&nbsp;</div>
+                <div className="legend-label">Orange</div>
+            </div>
+            <div className="legend-cell">
+                <div className="legend-color yellow-day">&nbsp;</div>
+                <div className="legend-label">Yellow</div>
+            </div>
+        </div>
     </div>);
 }
