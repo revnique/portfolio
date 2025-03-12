@@ -1,7 +1,7 @@
 <div class="main-content-header">
     <div class="summary">
         <h1>BuckLite Page</h1>
-        <div class="summary-subheader">(dollar serial numbers) <span class="summary-subheader-link" (click)="toggleSummary()"><fa-icon [icon]="faCaretUp"></fa-icon></span></div>
+        <div class="summary-subheader">(dollar serial numbers) <span class="summary-subheader-link" (click)="toggleSummary()"><fa-icon *ngIf="showSummary" [icon]="faCaretUp"></fa-icon><fa-icon *ngIf="!showSummary" [icon]="faCaretDown"></fa-icon></span></div>
         <div class="summary-text" [ngClass]="{'show': showSummary,'hide': !showSummary}">
             Every one dollar bill has a serial number. This page allows you to analyze the serial numbers of one dollar bills. Depending on the serial number, it will be rated from 1 to 100. 
             The rating is based on the serial number's pattern and the date it was created. For instance <span className="bold">K77777777*</span> is a 100 rating because it is very rare with the same digit repeated 7 times in a row and it's also a Star Note meaning it ends in a star (*)
