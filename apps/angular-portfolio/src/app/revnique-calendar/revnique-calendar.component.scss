@@ -1,0 +1,159 @@
+
+.revnique-calendar {
+    display: flex;
+    flex-direction: column;
+    .cal-container {
+        background-color: white;
+    }
+
+    .control-section {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 5px;
+        align-items: center;
+    
+        .month-year-container {
+            width: 145px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            font-size: 17px;
+            font-weight: bold;
+            span {
+                padding: 5px;
+            }
+        }
+    }
+    
+    .calendar-section {
+        width: 100%;
+    }
+    
+    .calendar-cell {
+        width: 45px;
+        height: 20px;
+        padding:5px;
+    }
+    
+    .days-of-week-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin-bottom: 5px;
+        border-bottom: solid 1px black;
+    
+        .calendar-cell {
+            height: 20px;
+        }
+    }
+    
+    .calendar-days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        column-gap: 0;
+        row-gap: 0;
+    }
+    
+    .padding-day {
+        color: #ddd;
+    }
+    
+    .red-day {
+        background-color: red;
+        color: #efefef;
+    }
+    
+    .small-square {
+        display: block;
+        width: 10px;
+        height: 10px;
+    }
+    
+    .orange-day {
+        background-color: orange;
+        color: #efefef;
+    }
+    
+    .yellow-day {
+        background-color: yellow;
+    }    
+
+    .today-day {
+        background-color: green;
+        color: #efefef;
+    }
+
+    .day-number {
+        padding: 5px;
+    }
+
+}
+
+
+.clickable {
+    cursor: pointer;
+}
+
+.fa-icon {
+    width: 20px;
+    padding: 5px;
+}
+.align-right {
+    text-align: right;
+}
+
+@media (prefers-color-scheme: dark) {
+    .revnique-calendar {
+        .padding-day {
+            color: #666666;
+        }
+
+        .days-of-week-row {
+            border-bottom: solid 1px #efefef;
+
+            .calendar-cell {
+                height: 20px;
+            }
+        }
+
+        .red-day {
+            border: solid 1px red;
+            background-color: transparent;
+        }
+
+        .small-square {
+            display: block;
+            width: 10px;
+            height: 10px;
+        }
+
+        .orange-day {
+            border: solid 1px orange;
+            background-color: transparent;
+        }
+
+        .yellow-day {
+            border: solid 1px yellow;
+            background-color: transparent;
+        }
+
+        .today-day {
+            border: solid 1px rgb(105 245 171);
+            background-color: transparent;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .revnique-calendar {
+        .calendar-cell {
+            width: 35px;
+            height: 15px;
+            margin: 6px;
+            padding: 0px;
+        }
+        .day-number {
+            padding: 2px;
+        }
+    }
+}

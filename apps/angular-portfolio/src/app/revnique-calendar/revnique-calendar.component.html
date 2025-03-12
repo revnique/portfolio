@@ -1,0 +1,26 @@
+<div class="revnique-calendar">
+    <div class="control-section">
+        <div (click)="prevMonth()" class="clickable fa-icon align-right"><fa-icon [icon]="faChevronLeft"></fa-icon></div>
+        <div class="month-year-container"><span class="month-name">{{calInfo.currentMonthName}}</span><span class="year-name">{{calInfo.currentYear}}</span></div>
+        <div (click)="nextMonth()" class="clickable fa-icon"><fa-icon [icon]="faChevronRight"></fa-icon></div>
+    </div>
+    <div class="calendar-section">
+        <div class="days-of-week-row">
+            <div class="calendar-cell">Sun</div>
+            <div class="calendar-cell">Mon</div>
+            <div class="calendar-cell">Tue</div>
+            <div class="calendar-cell">Wed</div>
+            <div class="calendar-cell">Thu</div>
+            <div class="calendar-cell">Fri</div>
+            <div class="calendar-cell">Sat</div>
+        </div>
+        <div class="calendar-days">
+            <ng-container *ngFor="let day of calInfo.dayList; let _i = index">
+                <div class="calendar-cell" [ngClass]="{'padding-day':day.isPaddingDay}" 
+                    attr.aria-label="{{day.fullDt}}" attr.aria-date="{{day.dt}}">
+                    <span class="day-number" [ngClass]="{'red-day':day.showRed, 'today-day':day.isToday, 'orange-day':day.showOrange, 'yellow-day':day.showYellow}">{{day.dayNumber}}</span>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
