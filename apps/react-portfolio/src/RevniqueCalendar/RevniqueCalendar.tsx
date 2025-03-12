@@ -24,7 +24,7 @@ export default function RevniqueCalendar() {
     const [calInfoState, setCalInfoState] = useState(calInfo);
     const redDays = ['3/3/2025', '3/8/2025', '6/28/2025', '6/29/2025', '5/17/2025', '5/28/2025', '7/27/2025', '7/11/2025'];
     const yellowDays = ['6/2/2025', '6/8/2025', '3/18/2025', '6/21/2025', '5/7/2025', '5/2/2025', '7/7/2025', '3/21/2025'];
-    const greenDays = ['6/1/2025', '6/8/2025', '6/19/2025', '5/25/2025', '3/30/2025', '3/22/2025', '7/2/2025', '7/19/2025'];
+    const orangeDays = ['6/1/2025', '6/8/2025', '6/19/2025', '5/25/2025', '3/30/2025', '3/22/2025', '7/2/2025', '7/19/2025'];
     const daysInMonth = (year: number, month: number) => new Date(year, month, 0).getDate();
     const daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
@@ -99,7 +99,7 @@ export default function RevniqueCalendar() {
         }
         calInfo.dayList.forEach((dt) => {
             if (!dt.isPaddingDay) {
-                dt.showOrange = greenDays.some((d) => d === dt.dt);
+                dt.showOrange = orangeDays.some((d) => d === dt.dt);
                 dt.showYellow = yellowDays.some((d) => d === dt.dt);
                 dt.showRed = redDays.some((d) => d === dt.dt);
             }
