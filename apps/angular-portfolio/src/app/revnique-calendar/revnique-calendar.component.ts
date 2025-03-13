@@ -44,10 +44,6 @@ export class RevniqueCalendarComponent implements OnChanges {
   
   generateCalendar(d: Date){ 
     this.calInfo.currentDate = d;
-    console.log("generateCalendar", d);
-    console.log("this.redDays", this.redDays);
-    console.log("this.yellowDays", this.yellowDays);
-    console.log("this.orangeDays", this.orangeDays);
     this.calInfo.currentJSMonthNumber = d.getMonth();
     this.calInfo.currentMonthName = d.getMonthName();
 
@@ -77,7 +73,6 @@ export class RevniqueCalendarComponent implements OnChanges {
     this.calInfo.dayList = [];
 
     let todayDt = `${new Date().getMonth()+1}/${new Date().getDate()}/${new Date().getFullYear()}`;
-    console.log("todayDt", todayDt);
     for (let index = 1; index <= total; index++) {
       let dayNumber = index;
       let isPaddingDay = false;

@@ -33,13 +33,13 @@ export class PortfolioEffects {
 
     addCalendarEvent$ = createEffect(() => this.actions$.pipe(
         ofType(PortfolioActions.addCalendarEvent),
-        mergeMap((action) => this.calendarService.addCalendarEvent(action.event).then(() => PortfolioActions.addCalendarEventSuccess())
+        mergeMap((action) => this.calendarService.addCalendarEvent(action.event).then(() => PortfolioActions.addCalendarEventSuccess()).then(() => PortfolioActions.loadCalendarEvents())
         ))
     );
 
     deleteCalendarEvent$ = createEffect(() => this.actions$.pipe(
         ofType(PortfolioActions.deleteCalendarEvent),
-        mergeMap((action) => this.calendarService.deleteCalendarEvent(action.id, action.eventDate).then(() => PortfolioActions.deleteCalendarEventSuccess())
+        mergeMap((action) => this.calendarService.deleteCalendarEvent(action.id, action.eventDate).then(() => PortfolioActions.deleteCalendarEventSuccess()).then(() => PortfolioActions.loadCalendarEvents())
         ))
     );
 }

@@ -12,12 +12,22 @@
         <div class="main-calendar-container">
             <!-- <pre>{{portfolioState | json}}</pre> -->
             <h1>Calendar</h1>
-            <app-revnique-calendar [redDays]="portfolioState.redDays" [orangeDays]="portfolioState.orangeDays" [yellowDays]="portfolioState.yellowDays"></app-revnique-calendar>
-            <div class="selected-event-container" *ngIf="portfolioState.selectedCalendarEvent && portfolioState.selectedCalendarEvent.id">
-                <div>
-                    <span class="event-color-square" [ngClass]="{'red-day': portfolioState.selectedCalendarEvent.eventColor === 'red', 
+            <div *ngIf="portfolioState.isPending">
+                <div class="skeleton-loader-container">
+                    <div class="skeleton-loader-base"></div>
+                    <div class="skeleton-loader-indicator"></div>
+                </div>
+            </div>
+            <app-revnique-calendar *ngIf="!portfolioState.isPending" [redDays]="portfolioState.redDays" [orangeDays]="portfolioState.orangeDays" [yellowDays]="portfolioState.yellowDays"></app-revnique-calendar>
+            <div class="selected-event-container" *ngIf="(portfolioState.selectedCalendarEvent && portfolioState.selectedCalendarEvent.id)">
+                <div class="selected-event-container-content">
+                    <div class="event-color-square" [ngClass]="{'red-day': portfolioState.selectedCalendarEvent.eventColor === 'red', 
                             'orange-day': portfolioState.selectedCalendarEvent.eventColor === 'orange', 
-                            'yellow-day': portfolioState.selectedCalendarEvent.eventColor === 'yellow'}">&nbsp;&nbsp;&nbsp;</span><span class="event-color-text">{{portfolioState.selectedCalendarEvent.title}}</span>
+                            'yellow-day': portfolioState.selectedCalendarEvent.eventColor === 'yellow'}">&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div>
+                        <span class="event-color-text">{{portfolioState.selectedCalendarEvent.title}}</span>
+                    </div>
                 </div>
                 <div>
                     <fa-icon [icon]="faTrash" class="delete-icon" (click)="deleteEvent(portfolioState.selectedCalendarEvent)"></fa-icon>
@@ -29,7 +39,7 @@
             <form class="form-container" [formGroup]="eventForm">
                 <div class="form-group">
                     <label htmlFor="title">Event Name</label>
-                    <input type="text" class="form-field" formControlName="title" />
+                    <input type="text" class="form-field" formControlName="title" maxlength="50" />
                 </div>
                 <div class="form-group">
                     <label htmlFor="eventDate">Date</label>
@@ -39,19 +49,19 @@
                     <div class="event-color-container">
                         <input type="radio" formControlName="eventColor" id="red" value="red" />
                         <label for="red">
-                            <span class="event-color-square red-day">&nbsp;&nbsp;&nbsp;</span><span class="event-color-text">Red</span>
+                            <span class="event-color-text">Red</span><span class="event-color-square red-day">&nbsp;&nbsp;&nbsp;</span>
                         </label>
                     </div>
                     <div class="event-color-container">
                         <input type="radio" formControlName="eventColor" id="orange" value="orange" />
                         <label for="orange">
-                            <span class="event-color-square orange-day">&nbsp;&nbsp;&nbsp;</span><span class="event-color-text">Orange</span>
+                            <span class="event-color-text">Orange</span><span class="event-color-square orange-day">&nbsp;&nbsp;&nbsp;</span>
                         </label> 
                     </div>
                     <div class="event-color-container">
                         <input type="radio" formControlName="eventColor" id="yellow" value="yellow" />
                         <label for="yellow">
-                            <span class="event-color-square yellow-day">&nbsp;&nbsp;&nbsp;</span><span class="event-color-text">Yellow</span>
+                            <span class="event-color-text">Yellow</span><span class="event-color-square yellow-day">&nbsp;&nbsp;&nbsp;</span>
                         </label> 
                     </div>
                 </div>

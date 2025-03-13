@@ -43,7 +43,7 @@ export class EventsCalendarComponent implements OnInit{
         eventColor: this.eventForm.get('eventColor')?.value!
       }
     }));
-    this.store.dispatch(PortfolioActions.loadCalendarEvents());
+    this.resetEventForm();
   }
 
   deleteEvent(selectedEvent: CalendarEvent){
@@ -52,10 +52,11 @@ export class EventsCalendarComponent implements OnInit{
       id: selectedEvent.id,
       eventDate: new Date(selectedEvent.eventDate).toISOString()
     }));
-    setTimeout(() => {
-      this.store.dispatch(PortfolioActions.loadCalendarEvents());
-    }, 1000);
-  } 
+  }
+  
+  resetEventForm(){
+    this.eventForm.reset();
+  }
 
   toggleSummary(){
     this.showSummary = !this.showSummary;

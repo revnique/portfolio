@@ -79,6 +79,34 @@ export const portfolioReducer = createReducer(
     on(PortfolioActions.selectCalendarEvent, (state, action) => ({
         ...state,
         selectedCalendarEvent: action.event!
+    })),
+    on(PortfolioActions.deleteCalendarEvent, (state) => ({
+        ...state,
+        isPending: true,
+        selectedCalendarEvent: {
+            id: '',
+            title: '',
+            eventDate: '',
+            eventColor: ''
+        }
+    })),
+    on(PortfolioActions.deleteCalendarEventSuccess, (state) => ({
+        ...state,
+        isPending: false
+    })),
+    on(PortfolioActions.addCalendarEvent, (state) => ({
+        ...state,
+        isPending: true,
+    })),
+    on(PortfolioActions.addCalendarEventSuccess, (state) => ({
+        ...state,
+        isPending: false,
+        selectedCalendarEvent: {
+            id: '',
+            title: '',
+            eventDate: '',
+            eventColor: ''
+        }
     }))
 );
 
