@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Amplify } from 'aws-amplify';
-import config from '../../../aws-export';
+import config from '../../services/aws-export';
 import { generateClient } from 'aws-amplify/api';
 import { getMatches, Match, BuckLite } from './buck-helper';
 import { injectMutation, QueryClient } from '@tanstack/angular-query-experimental';

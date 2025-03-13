@@ -2,7 +2,7 @@ import { createActionGroup, props } from '@ngrx/store';
 import { BuckLite } from '../../app/buck-lite/buck-helper';
 import { emptyProps } from '@ngrx/store';
 import { createSelector } from '@ngrx/store';
-import { PortfolioState } from './portfolio.state';
+import { CalendarEvent, PortfolioState } from './portfolio.state';
 
 export const PortfolioActions = createActionGroup({
     source: 'Portfolio',
@@ -12,6 +12,13 @@ export const PortfolioActions = createActionGroup({
         loadBuckLite: props<{ SN: string }>(),
         loadBuckLiteSuccess: props<{ buckLite: BuckLite }>(),
         setIsPending: props<{ isPending: boolean }>(),
+        addCalendarEvent: props<{ event: CalendarEvent }>(),
+        addCalendarEventSuccess: emptyProps(),
+        deleteCalendarEvent: props<{ id: string, eventDate: string }>(),
+        deleteCalendarEventSuccess: emptyProps(),
+        loadCalendarEvents: emptyProps(),
+        loadCalendarEventsSuccess: props<{ events: CalendarEvent[] }>(),
+        selectCalendarEvent: props<{ event: CalendarEvent | null }>(),
     },
 });
 

@@ -1,6 +1,6 @@
 
 // @ts-ignore
-import config from '../../aws-export';
+import config from './aws-export';
 Amplify.configure(config as any);
 import { Amplify } from 'aws-amplify';
 import { generateClient } from "aws-amplify/api";
@@ -8,7 +8,6 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class PortfolioService {
   private client: any;
-
   constructor() {
     this.client = generateClient();
   }

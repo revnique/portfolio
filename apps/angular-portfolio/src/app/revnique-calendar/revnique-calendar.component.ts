@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Day } from './day.interface';
 import { CommonModule } from '@angular/common';
 import './date';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { CalendarEvent, PortfolioState } from '../../store/portfolio-store/portfolio.state';
+import { PortfolioActions } from '../../store/portfolio-store/portfolio.actions';
+import { Store } from '@ngrx/store';
 @Component({
   selector: 'app-revnique-calendar',
   imports: [CommonModule, FontAwesomeModule],
   templateUrl: './revnique-calendar.component.html',
   styleUrl: './revnique-calendar.component.scss'
 })
-export class RevniqueCalendarComponent implements OnInit {
+export class RevniqueCalendarComponent implements OnChanges {
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
   calInfo = {
@@ -26,21 +29,25 @@ export class RevniqueCalendarComponent implements OnInit {
     currentMonthFirstDayOfWeekName: '',
     dayList: [] as Day[],
   }
-  redDays = ['3/3/2025','3/8/2025','6/28/2025','6/29/2025','5/17/2025','5/28/2025','7/27/2025','7/11/2025'];
-  yellowDays = ['6/2/2025','6/8/2025','3/18/2025','6/21/2025','5/7/2025','5/2/2025','7/7/2025','3/21/2025'];
-  greenDays = ['6/1/2025','6/8/2025','6/19/2025','5/25/2025','3/30/2025','3/22/2025','7/2/2025','7/19/2025'];
+  @Input() redDays: CalendarEvent[] = [];
+  @Input() yellowDays: CalendarEvent[] = [];
+  @Input() orangeDays: CalendarEvent[] = [];
   daysInMonth = (year:number, month:number) => new Date(year, month, 0).getDate();
+  
   daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday' ];
 
-  constructor() { }
+  constructor(private store: Store<{ portfolio: PortfolioState }>) { }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.generateCalendar(new Date());
   }
   
   generateCalendar(d: Date){ 
     this.calInfo.currentDate = d;
     console.log("generateCalendar", d);
+    console.log("this.redDays", this.redDays);
+    console.log("this.yellowDays", this.yellowDays);
+    console.log("this.orangeDays", this.orangeDays);
     this.calInfo.currentJSMonthNumber = d.getMonth();
     this.calInfo.currentMonthName = d.getMonthName();
 
@@ -99,7 +106,8 @@ export class RevniqueCalendarComponent implements OnInit {
         showOrange: false,
         showYellow: false,
         showRed: false,
-        isToday: todayDt === dt
+        isToday: todayDt === dt,
+        calendarEvent: undefined
       }
       this.calInfo.dayList.push(day);
       paddingDayCount -= 1;
@@ -107,11 +115,24 @@ export class RevniqueCalendarComponent implements OnInit {
     }
     this.calInfo.dayList.forEach((dt)=>{
       if(!dt.isPaddingDay){
-        dt.showOrange = this.greenDays.some((d)=>d === dt.dt);
-        dt.showYellow = this.yellowDays.some((d)=>d === dt.dt);
-        dt.showRed = this.redDays.some((d)=>d === dt.dt);
+        dt.calendarEvent = this.orangeDays.find((d)=>d.eventDate === dt.dt) || this.yellowDays.find((d)=>d.eventDate === dt.dt) || this.redDays.find((d)=>d.eventDate === dt.dt);
+        dt.showOrange = this.orangeDays.some((d)=>d.eventDate === dt.dt);
+        dt.showYellow = this.yellowDays.some((d)=>d.eventDate === dt.dt);
+        dt.showRed = this.redDays.some((d)=>d.eventDate === dt.dt);
       }
     })
+  }
+
+  selectDay(day: Day){
+    if(day.calendarEvent){  
+      this.store.dispatch(PortfolioActions.selectCalendarEvent({
+        event: day.calendarEvent!
+      }));
+    } else {
+      this.store.dispatch(PortfolioActions.selectCalendarEvent({
+        event: null
+      }));
+    }
   }
 
   prevMonth() {

@@ -16,7 +16,7 @@
         </div>
         <div class="calendar-days">
             <ng-container *ngFor="let day of calInfo.dayList; let _i = index">
-                <div class="calendar-cell" [ngClass]="{'padding-day':day.isPaddingDay}" 
+                <div class="calendar-cell" [ngClass]="{'padding-day':day.isPaddingDay}" (click)="selectDay(day)"
                     attr.aria-label="{{day.fullDt}}" attr.aria-date="{{day.dt}}">
                     <span class="day-number" [ngClass]="{'red-day':day.showRed, 'today-day':day.isToday, 'orange-day':day.showOrange, 'yellow-day':day.showYellow}">{{day.dayNumber}}</span>
                 </div>

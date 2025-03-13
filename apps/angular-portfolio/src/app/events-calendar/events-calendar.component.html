@@ -1,0 +1,64 @@
+<div class="main-content-header">
+    <div class="summary">
+        <h1>Events Calendar</h1>
+        <div class="summary-subheader">(add events to calendar) <span class="summary-subheader-link" (click)="toggleSummary()"><fa-icon *ngIf="showSummary" [icon]="faCaretUp"></fa-icon><fa-icon *ngIf="!showSummary" [icon]="faCaretDown"></fa-icon></span></div>
+        <div class="summary-text" [ngClass]="{'show': showSummary,'hide': !showSummary}">
+            This page allows you to add events to the calendar. You can add events by clicking the "Add Event" button.
+        </div>
+    </div>
+</div>
+<div class="main-content-body">
+    <div class="calendar-content-container" *ngIf="portfolioState$ | async as portfolioState">
+        <div class="main-calendar-container">
+            <!-- <pre>{{portfolioState | json}}</pre> -->
+            <h1>Calendar</h1>
+            <app-revnique-calendar [redDays]="portfolioState.redDays" [orangeDays]="portfolioState.orangeDays" [yellowDays]="portfolioState.yellowDays"></app-revnique-calendar>
+            <div class="selected-event-container" *ngIf="portfolioState.selectedCalendarEvent && portfolioState.selectedCalendarEvent.id">
+                <div>
+                    <span class="event-color-square" [ngClass]="{'red-day': portfolioState.selectedCalendarEvent.eventColor === 'red', 
+                            'orange-day': portfolioState.selectedCalendarEvent.eventColor === 'orange', 
+                            'yellow-day': portfolioState.selectedCalendarEvent.eventColor === 'yellow'}">&nbsp;&nbsp;&nbsp;</span><span class="event-color-text">{{portfolioState.selectedCalendarEvent.title}}</span>
+                </div>
+                <div>
+                    <fa-icon [icon]="faTrash" class="delete-icon" (click)="deleteEvent(portfolioState.selectedCalendarEvent)"></fa-icon>
+                </div>
+            </div>
+        </div>
+        <div class="event-form-container">
+            <h1>Add Event</h1>
+            <form class="form-container" [formGroup]="eventForm">
+                <div class="form-group">
+                    <label htmlFor="title">Event Name</label>
+                    <input type="text" class="form-field" formControlName="title" />
+                </div>
+                <div class="form-group">
+                    <label htmlFor="eventDate">Date</label>
+                    <input type="date" class="form-field" formControlName="eventDate" />
+                </div>
+                <div class="event-color-radiocontainer">
+                    <div class="event-color-container">
+                        <input type="radio" formControlName="eventColor" id="red" value="red" />
+                        <label for="red">
+                            <span class="event-color-square red-day">&nbsp;&nbsp;&nbsp;</span><span class="event-color-text">Red</span>
+                        </label>
+                    </div>
+                    <div class="event-color-container">
+                        <input type="radio" formControlName="eventColor" id="orange" value="orange" />
+                        <label for="orange">
+                            <span class="event-color-square orange-day">&nbsp;&nbsp;&nbsp;</span><span class="event-color-text">Orange</span>
+                        </label> 
+                    </div>
+                    <div class="event-color-container">
+                        <input type="radio" formControlName="eventColor" id="yellow" value="yellow" />
+                        <label for="yellow">
+                            <span class="event-color-square yellow-day">&nbsp;&nbsp;&nbsp;</span><span class="event-color-text">Yellow</span>
+                        </label> 
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button type="button" (click)="save()">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

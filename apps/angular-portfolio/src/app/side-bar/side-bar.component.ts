@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { RootActions, selectRootState } from '../../store/root.actions';
-import { faClose, faCode, faMoneyBill, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { faClose, faCode, faMoneyBill, faGlobe, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -20,6 +20,7 @@ export class SideBarComponent implements OnInit {
   faCode = faCode;
   faMoneyBill = faMoneyBill;
   faGlobe = faGlobe;
+  faCalendar = faCalendar;
   isLocalhost = window.location.href.indexOf('http://localhost:') === 0;
   homeUrl = this.isLocalhost ? 'http://localhost:37777' : 'https://revnique.works';
   constructor(private store: Store) {}
