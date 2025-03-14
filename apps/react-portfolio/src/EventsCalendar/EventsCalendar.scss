@@ -1,0 +1,189 @@
+.main-content-body {
+    padding: 25px;
+}
+.calendar-content-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 50px;
+
+    .form-container {
+        margin-top: 35px;
+        border: solid 1px #efefef;
+        background-color: #efefef;
+        padding: 25px;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+        label {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        input {
+            box-sizing: border-box;
+        }
+    }
+    .main-calendar-container {
+        padding: 0px 15px 0px 15px;
+    }
+
+    .event-color-radiocontainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+    .event-color-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+        label {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: start;
+            margin-right: 15px;
+        }
+        input {
+            margin-right: 5px;
+            width: 25px;
+            height: 25px;
+        }
+    }
+    .event-color-square {
+        display: inline-block;
+        margin-left: 5px;
+    }
+    .selected-event-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin: 15px;
+        background-color: #efefef;
+        padding: 15px;
+        max-width: 300px;
+        .delete-icon {
+            cursor: pointer;
+            margin-left: 15px;
+        }
+        .event-color-square {
+            margin-left: 0px;
+            margin-right: 10px;
+        }
+    }
+    .selected-event-container-content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+    }
+
+    .skeleton-loader-container {
+        position: relative;
+        width: 300px;
+        .skeleton-loader-base {
+            height: 30px;
+            width: 200px;
+            background-color: transparent;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .skeleton-loader-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 30px;
+            width: 50px;
+            background-color: lightsteelblue;
+            animation-name: slide;
+            animation-duration: 1.5s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+    }
+
+    @keyframes slide {
+        0% { transform: translateX(0px); background-color: lightgreen; }
+        50% { transform: translateX(250px); background-color: lightsteelblue; }
+        100% { transform: translateX(0px); background-color: steelblue; }
+    }
+
+
+}
+
+.red-day {
+    background-color: red;
+    color: #efefef;
+    cursor: pointer;
+}
+
+.small-square {
+    display: block;
+    width: 10px;
+    height: 10px;
+}
+
+.orange-day {
+    background-color: orange;
+    color: #efefef;
+    cursor: pointer;
+}
+
+.yellow-day {
+    background-color: yellow;
+    cursor: pointer;
+}    
+
+
+@media (prefers-color-scheme: dark) {
+    .red-day {
+        border: solid 1px red;
+        background-color: transparent;
+    }
+
+    .orange-day {
+        border: solid 1px orange;
+        background-color: transparent;
+    }
+
+    .yellow-day {
+        border: solid 1px yellow;
+        background-color: transparent;
+    }
+
+    .today-day {
+        border: solid 1px rgb(105 245 171);
+        background-color: transparent;
+    }
+
+    .form-container {
+        background-color: transparent !important;
+    }
+
+    .selected-event-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+        gap: 10px;
+        margin: 15px;
+        border: solid 1px #efefef;
+        background: transparent !important;
+        padding: 15px;
+        max-width: 300px;
+        .delete-icon {
+            cursor: pointer;
+            margin-left: 15px;
+        }
+    }
+}

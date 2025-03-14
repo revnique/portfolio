@@ -34,6 +34,8 @@ export class HeaderComponent {
       window.location.href = `${url}/bucklite`;
     } else if (page === 'components') {
       window.location.href = `${url}/components`;
+    } else if (page === 'events') {
+      window.location.href = `${url}/events`;
     } else {
       window.location.href = `${url}/`;
     }

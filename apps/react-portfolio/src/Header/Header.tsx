@@ -14,11 +14,13 @@ export default function Header() {
     const page = window.location.href.split('/')[3];
     const isLocalhost = window.location.href.indexOf('http://localhost:') === 0;
     const url = isLocalhost ? 'http://localhost:5177' : 'https://angular.revnique.works';
-    const gotToAngular = () => {
+    const goToAngular = () => {
         if (page === 'bucklite') {
           window.location.href = `${url}/bucklite`;
         } else if (page === 'components') {
           window.location.href = `${url}/components`;
+        } else if (page === 'events') {
+          window.location.href = `${url}/events`;
         } else {
           window.location.href = `${url}/`;
         }
@@ -39,7 +41,7 @@ export default function Header() {
                     <img className="logo" src="/react-logo.png" alt="Revnique's React Portfolio" />
                 </div>
                 <div className="logo-container">
-                    <img className="logo" src="/angular-logo.png" alt="Revnique's Angular Portfolio" onClick={gotToAngular} />
+                    <img className="logo" src="/angular-logo.png" alt="Revnique's Angular Portfolio" onClick={goToAngular} />
                 </div>
             </div>
         </div>

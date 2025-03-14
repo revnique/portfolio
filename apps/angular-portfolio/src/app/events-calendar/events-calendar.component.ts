@@ -49,8 +49,7 @@ export class EventsCalendarComponent implements OnInit{
   deleteEvent(selectedEvent: CalendarEvent){
     console.log("deleteEvent", selectedEvent.id);
     this.store.dispatch(PortfolioActions.deleteCalendarEvent({
-      id: selectedEvent.id,
-      eventDate: new Date(selectedEvent.eventDate).toISOString()
+      id: selectedEvent.id
     }));
   }
   

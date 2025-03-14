@@ -2,11 +2,11 @@ import './SideBar.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faMoneyBill, faCode, faClose, faBars, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { faMoneyBill, faCode, faClose, faBars, faGlobe, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSideBar as toggleSideBarAction } from '../store/root.actions';
 import { RootState } from '../store/root.state';
-library.add(faMoneyBill, faCode, faClose, faBars, faGlobe);
+library.add(faMoneyBill, faCode, faClose, faBars, faGlobe, faCalendar);
 
 export default function SideBar() {
     const dispatch = useDispatch();
@@ -27,6 +27,7 @@ export default function SideBar() {
         <ul>
             <li><NavLink to="/bucklite" className={({ isActive }) => isActive ? 'selected' : ''}><FontAwesomeIcon className="fa-icon" icon="money-bill" /> BuckLite</NavLink></li>
             <li><NavLink to="/components" className={({ isActive }) => isActive ? 'selected' : ''}><FontAwesomeIcon className="fa-icon" icon="code" /> Components</NavLink></li>
+            <li><NavLink to="/events" className={({ isActive }) => isActive ? 'selected' : ''}><FontAwesomeIcon className="fa-icon" icon="calendar" /> Events Calendar</NavLink></li>
         </ul>
         <div className="side-bar-footer" onClick={goToHome}>
             <FontAwesomeIcon className="fa-icon" icon="globe" />

@@ -1,16 +1,31 @@
 import { BuckLite } from "../../BuckLite/buck-helper";
 
+
 export const initialPortfolioState: PortfolioState = {
+    isPending: true,
     BuckLites: [],
     BuckLite: {} as BuckLite,
-    isPending: true
+    CalendarEvents: [],
+    redDays: [],
+    orangeDays: [],
+    yellowDays: [],
+    selectedCalendarEvent: {} as CalendarEvent
 }
 
 export interface PortfolioState {
+    isPending: boolean;
     BuckLites: BuckLite[];
     BuckLite: BuckLite;
-    isPending: boolean;
+    CalendarEvents: CalendarEvent[];
+    redDays: CalendarEvent[];
+    orangeDays: CalendarEvent[];
+    yellowDays: CalendarEvent[];
+    selectedCalendarEvent: CalendarEvent;
 }
 
-
-
+export interface CalendarEvent {
+    id: string;
+    title: string;
+    eventDate: string;
+    eventColor: string;
+}

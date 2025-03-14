@@ -19,8 +19,16 @@ import ValueBar from '../ValueBar/ValueBar';
 import { useBreakpoint } from '../services/PortfolioService';
 import { checkSerial } from './buck-helper';
 // @ts-ignore
-import config from '../aws-exports';
-Amplify.configure(config as any);
+Amplify.configure({
+    API: {
+      GraphQL: {
+        endpoint: 'https://igrvr4i6vjb6teheuevaxzzfsq.appsync-api.us-east-2.amazonaws.com/graphql',
+        region: 'us-east-2',
+        defaultAuthMode: 'apiKey',
+        apiKey: 'da2-l4lmpncptncfvlicve3743ux54'
+      }
+    }
+});
 
 export default function BuckLitePage() {
     const state = useSelector((state:any) => state.portfolioReducer as PortfolioState);

@@ -14,7 +14,7 @@ export const PortfolioActions = createActionGroup({
         setIsPending: props<{ isPending: boolean }>(),
         addCalendarEvent: props<{ event: CalendarEvent }>(),
         addCalendarEventSuccess: emptyProps(),
-        deleteCalendarEvent: props<{ id: string, eventDate: string }>(),
+        deleteCalendarEvent: props<{ id: string }>(),
         deleteCalendarEventSuccess: emptyProps(),
         loadCalendarEvents: emptyProps(),
         loadCalendarEventsSuccess: props<{ events: CalendarEvent[] }>(),

@@ -39,7 +39,7 @@ export class PortfolioEffects {
 
     deleteCalendarEvent$ = createEffect(() => this.actions$.pipe(
         ofType(PortfolioActions.deleteCalendarEvent),
-        mergeMap((action) => this.calendarService.deleteCalendarEvent(action.id, action.eventDate).then(() => PortfolioActions.deleteCalendarEventSuccess()).then(() => PortfolioActions.loadCalendarEvents())
+        mergeMap((action) => this.calendarService.deleteCalendarEvent(action.id).then(() => PortfolioActions.deleteCalendarEventSuccess()).then(() => PortfolioActions.loadCalendarEvents())
         ))
     );
 }

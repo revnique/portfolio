@@ -1,7 +1,15 @@
 
 // @ts-ignore
-import config from '../aws-exports';
-Amplify.configure(config as any);
+Amplify.configure({
+  API: {
+    GraphQL: {
+      endpoint: 'https://igrvr4i6vjb6teheuevaxzzfsq.appsync-api.us-east-2.amazonaws.com/graphql',
+      region: 'us-east-2',
+      defaultAuthMode: 'apiKey',
+      apiKey: 'da2-l4lmpncptncfvlicve3743ux54'
+    }
+  }
+});
 import { Amplify } from 'aws-amplify';  
 import { generateClient } from "aws-amplify/api";
 const client = generateClient();

@@ -1,3 +1,4 @@
+import React from 'react';
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./RevniqueCalendar.scss";
@@ -5,9 +6,17 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { Day } from "./day.interface";
 import './date';
 import { useEffect, useState } from "react";
+import { CalendarEvent } from "../store/PortfolioStore/portfolio.state";
+import { useDispatch } from 'react-redux';
+import { selectCalendarEvent } from '../store/PortfolioStore/portfolio.actions';
+interface RevniqueCalendarProps {
+    redDays: CalendarEvent[];
+    yellowDays: CalendarEvent[];
+    orangeDays: CalendarEvent[];
+}
 
-export default function RevniqueCalendar() {
-
+const RevniqueCalendar: React.FC<RevniqueCalendarProps> = ({ redDays, yellowDays, orangeDays }) => {
+    const dispatch = useDispatch();
     const calInfo = {
         showTopRow: true,
         showBottomRow: true,
@@ -22,9 +31,6 @@ export default function RevniqueCalendar() {
         dayList: [] as Day[],
     }
     const [calInfoState, setCalInfoState] = useState(calInfo);
-    const redDays = ['3/3/2025', '3/8/2025', '6/28/2025', '6/29/2025', '5/17/2025', '5/28/2025', '7/27/2025', '7/11/2025'];
-    const yellowDays = ['6/2/2025', '6/8/2025', '3/18/2025', '6/21/2025', '5/7/2025', '5/2/2025', '7/7/2025', '3/21/2025'];
-    const orangeDays = ['6/1/2025', '6/8/2025', '6/19/2025', '5/25/2025', '3/30/2025', '3/22/2025', '7/2/2025', '7/19/2025'];
     const daysInMonth = (year: number, month: number) => new Date(year, month, 0).getDate();
     const daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
@@ -91,7 +97,8 @@ export default function RevniqueCalendar() {
                 showOrange: false,
                 showYellow: false,
                 showRed: false,
-                isToday: todayDt === dt
+                isToday: todayDt === dt,
+                calendarEvent: undefined
             }
             calInfo.dayList.push(day);
             paddingDayCount -= 1;
@@ -99,9 +106,10 @@ export default function RevniqueCalendar() {
         }
         calInfo.dayList.forEach((dt) => {
             if (!dt.isPaddingDay) {
-                dt.showOrange = orangeDays.some((d) => d === dt.dt);
-                dt.showYellow = yellowDays.some((d) => d === dt.dt);
-                dt.showRed = redDays.some((d) => d === dt.dt);
+                dt.calendarEvent = orangeDays.find((d)=>d.eventDate === dt.dt) || yellowDays.find((d)=>d.eventDate === dt.dt) || redDays.find((d)=>d.eventDate === dt.dt);
+                dt.showOrange = orangeDays.some((d)=>d.eventDate === dt.dt);
+                dt.showYellow = yellowDays.some((d)=>d.eventDate === dt.dt);
+                dt.showRed = redDays.some((d)=>d.eventDate === dt.dt);
             }
         })
         setCalInfoState({...calInfo}); 
@@ -123,6 +131,14 @@ export default function RevniqueCalendar() {
         }
         d.setMonth(newMonth);
         generateCalendar(d);
+    }
+
+    const selectDay = (day: Day) => {
+    if(day.calendarEvent){ 
+        dispatch(selectCalendarEvent(day.calendarEvent!));
+      } else {
+        dispatch(selectCalendarEvent({} as CalendarEvent));
+      }
     }
 
     useEffect(() => {
@@ -147,7 +163,7 @@ export default function RevniqueCalendar() {
             </div>
             <div className="calendar-days">
                 {calInfoState.dayList.map((day, index) => (
-                    <div className={`calendar-cell ${day.isPaddingDay ? 'padding-day' : ''}`} key={index}
+                    <div onClick={() => selectDay(day)} className={`calendar-cell ${day.isPaddingDay ? 'padding-day' : ''}`} key={index}
                         aria-label={day.fullDt} data-date={day.dt}>
                         <span className={`day-number ${day.showRed ? 'red-day' : ''} ${day.isToday ? 'today-day' : ''} ${day.showOrange ? 'orange-day' : ''} ${day.showYellow ? 'yellow-day' : ''}`}>{day.dayNumber}</span>
                     </div>
@@ -174,3 +190,5 @@ export default function RevniqueCalendar() {
         </div>
     </div>);
 }
+
+export default RevniqueCalendar;

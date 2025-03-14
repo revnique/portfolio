@@ -1,3 +1,5 @@
+import { CalendarEvent } from "../store/PortfolioStore/portfolio.state";
+
 export interface Day {
     uId: number;
     dayNumber: number;
@@ -8,4 +10,5 @@ export interface Day {
     showYellow: boolean;
     showRed: boolean;
     isToday: boolean;
+    calendarEvent?: CalendarEvent;
 } 

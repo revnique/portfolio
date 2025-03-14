@@ -2,12 +2,40 @@ import { useState } from "react";
 import './ComponentsPage.scss';
 import ValueBar from "../ValueBar/ValueBar";
 import RevniqueCalendar from "../RevniqueCalendar/RevniqueCalendar";
+import { CalendarEvent } from "../store/PortfolioStore/portfolio.state";
+
 export default function ComponentsPage() {
     const [valueBarPositiveHeight, setValueBarPositiveHeight] = useState(70);
     
     const updateValueBarPositiveHeight = (height: number) => {
         setValueBarPositiveHeight(height);
     }
+
+    const redDays: CalendarEvent[] = ['3/3/2025', '3/7/2025', '6/28/2025', '6/29/2025', '5/17/2025', '5/28/2025', '7/27/2025', '7/11/2025'].map(d => {
+        return {
+            eventDate: d,
+            title: 'Red Day',
+            eventColor: 'red',
+            id: '1'
+        }
+    });
+    const yellowDays: CalendarEvent[] = ['6/2/2025', '6/8/2025', '3/18/2025', '6/21/2025', '5/7/2025', '5/2/2025', '7/7/2025', '3/21/2025'].map(d => {
+        return {
+            eventDate: d,
+            title: 'Yellow Day',
+            eventColor: 'yellow',
+            id: '1'
+        }
+    });
+    const orangeDays: CalendarEvent[] = ['6/1/2025', '6/8/2025', '6/19/2025', '5/25/2025', '3/30/2025', '3/22/2025', '7/2/2025', '7/19/2025'].map(d => {
+        return {
+            eventDate: d,
+            title: 'Orange Day',
+            eventColor: 'orange',
+            id: '1'
+        }
+    });
+
     return (
         <>
             <div className="main-content-header">
@@ -43,7 +71,7 @@ export default function ComponentsPage() {
                     <div className="section">
                         <h2>Calendar</h2>
                         <div className="calendar-container">
-                            <RevniqueCalendar />
+                            <RevniqueCalendar redDays={redDays} yellowDays={yellowDays} orangeDays={orangeDays} />
                         </div>
                     </div>
                 </div>
