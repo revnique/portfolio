@@ -169,8 +169,10 @@
 
 
 @media (prefers-color-scheme: dark) {
-    .form-container {
-        background-color: #333;
+    .buck-input-container {
+        .form-container {
+            background-color: #333;
+        }
     }
     .buck-list-container {
         table {
