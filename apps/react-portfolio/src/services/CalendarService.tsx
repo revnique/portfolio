@@ -30,7 +30,7 @@ export const addCalendarEvent = async (event: CalendarEvent) => {
     variables: {
         "createcalendareventinput": {
         "title": event.title,
-        "eventDate": eventDate.toISOString(),
+        "eventDate": eventDate.toISOString().split('T')[0],
         "eventColor": event.eventColor
       }
     }

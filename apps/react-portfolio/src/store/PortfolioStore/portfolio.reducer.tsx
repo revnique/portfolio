@@ -3,6 +3,7 @@ import { LoadBuckLites, LoadBuckLite, LoadBuckLitesSuccess, LoadBuckLiteSuccess,
 import { initialPortfolioState, CalendarEvent } from "./portfolio.state";
 import { BuckLite } from "../../BuckLite/buck-helper";
 import { getMatches } from "../../BuckLite/buck-helper";
+import { formatDate } from "date-fns";
 
 const portfolioReducer = (state = initialPortfolioState, action:any) => {
     console.log('portfolio action', action);
@@ -75,21 +76,27 @@ const portfolioReducer = (state = initialPortfolioState, action:any) => {
             let redDays = action.payload.filter((event: CalendarEvent) => event.eventColor === 'red').map((event: CalendarEvent) => {
                 const evt = JSON.parse(JSON.stringify(event));
                 const dt = new Date(evt.eventDate);
-                const eventDate = `${dt.getMonth() + 1}/${dt.getDate()+1}/${dt.getFullYear()}`;
+                const offset = dt.getTimezoneOffset();
+                dt.addMinutes(offset);
+                const eventDate = `${formatDate(dt, 'M/d/yyyy')}`;
                 evt.eventDate = eventDate;
                 return evt;
             });
             let orangeDays = action.payload.filter((event: CalendarEvent) => event.eventColor === 'orange').map((event: CalendarEvent) => {
                 const evt = JSON.parse(JSON.stringify(event));
                 const dt = new Date(evt.eventDate);
-                const eventDate = `${dt.getMonth() + 1}/${dt.getDate()+1}/${dt.getFullYear()}`;
+                const offset = dt.getTimezoneOffset();
+                dt.addMinutes(offset);
+                const eventDate = `${formatDate(dt, 'M/d/yyyy')}`;
                 evt.eventDate = eventDate;
                 return evt;
             });
             let yellowDays = action.payload.filter((event: CalendarEvent) => event.eventColor === 'yellow').map((event: CalendarEvent) => {
                 const evt = JSON.parse(JSON.stringify(event));
                 const dt = new Date(evt.eventDate);
-                const eventDate = `${dt.getMonth() + 1}/${dt.getDate()+1}/${dt.getFullYear()}`;
+                const offset = dt.getTimezoneOffset();
+                dt.addMinutes(offset);
+                const eventDate = `${formatDate(dt, 'M/d/yyyy')}`;
                 evt.eventDate = eventDate;
                 return evt;
             });

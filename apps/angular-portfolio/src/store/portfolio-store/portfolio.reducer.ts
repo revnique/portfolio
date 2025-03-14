@@ -2,6 +2,7 @@ import { PortfolioActions } from "./portfolio.actions";
 import { initialPortfolioState } from "./portfolio.state";
 import { createReducer, on } from "@ngrx/store";
 import { BuckLite, getMatches } from "../../app/buck-lite/buck-helper";
+import { formatDate } from "@angular/common";
 export const portfolioReducer = createReducer(
     initialPortfolioState,
     on(PortfolioActions.loadBuckLites, (state) => ({
@@ -49,24 +50,30 @@ export const portfolioReducer = createReducer(
         let redDays = action.events.filter(event => event.eventColor === 'red').map(event => {
             const evt = JSON.parse(JSON.stringify(event));
             const dt = new Date(evt.eventDate);
-            const eventDate = `${dt.getMonth() + 1}/${dt.getDate()+1}/${dt.getFullYear()}`;
+            dt.addHours(6);
+            const eventDate = `${formatDate(dt, 'M/d/yyyy', 'en-US')}`;
             evt.eventDate = eventDate;
             return evt;
         });
         let orangeDays = action.events.filter(event => event.eventColor === 'orange').map(event => {
             const evt = JSON.parse(JSON.stringify(event));
             const dt = new Date(evt.eventDate);
-            const eventDate = `${dt.getMonth() + 1}/${dt.getDate()+1}/${dt.getFullYear()}`;
+            const offset = dt.getTimezoneOffset();
+            dt.addMinutes(offset);
+            const eventDate = `${formatDate(dt, 'M/d/yyyy', 'en-US')}`;
             evt.eventDate = eventDate;
             return evt;
         });
         let yellowDays = action.events.filter(event => event.eventColor === 'yellow').map(event => {
             const evt = JSON.parse(JSON.stringify(event));
             const dt = new Date(evt.eventDate);
-            const eventDate = `${dt.getMonth() + 1}/${dt.getDate()+1}/${dt.getFullYear()}`;
+            const offset = dt.getTimezoneOffset();
+            dt.addMinutes(offset);
+            const eventDate = `${formatDate(dt, 'M/d/yyyy', 'en-US')}`;
             evt.eventDate = eventDate;
             return evt;
         });
+        console.log("redDays", redDays);
         return {
             ...state,
             CalendarEvents: action.events,

@@ -25,9 +25,9 @@ export default function SideBar() {
         <div className={`side-bar ${sideBarOpen ? 'open' : 'closed'}`}>
         <div className="side-bar-header">Projects<FontAwesomeIcon className="fa-icon" icon="close" onClick={toggleSideBar} /></div>
         <ul>
-            <li><NavLink to="/bucklite" className={({ isActive }) => isActive ? 'selected' : ''}><FontAwesomeIcon className="fa-icon" icon="money-bill" /> BuckLite</NavLink></li>
-            <li><NavLink to="/components" className={({ isActive }) => isActive ? 'selected' : ''}><FontAwesomeIcon className="fa-icon" icon="code" /> Components</NavLink></li>
-            <li><NavLink to="/events" className={({ isActive }) => isActive ? 'selected' : ''}><FontAwesomeIcon className="fa-icon" icon="calendar" /> Events Calendar</NavLink></li>
+            <li><NavLink to="/bucklite" className={({ isActive }) => isActive ? 'selected' : ''}><span><FontAwesomeIcon className="fa-icon" icon="money-bill" /></span>BuckLite</NavLink></li>
+            <li><NavLink to="/components" className={({ isActive }) => isActive ? 'selected' : ''}><span><FontAwesomeIcon className="fa-icon" icon="code" /></span>Components</NavLink></li>
+            <li><NavLink to="/events" className={({ isActive }) => isActive ? 'selected' : ''}><span><FontAwesomeIcon className="fa-icon" icon="calendar" /></span>Events</NavLink></li>
         </ul>
         <div className="side-bar-footer" onClick={goToHome}>
             <FontAwesomeIcon className="fa-icon" icon="globe" />
