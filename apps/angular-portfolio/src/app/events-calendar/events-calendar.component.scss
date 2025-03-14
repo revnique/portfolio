@@ -23,6 +23,8 @@
             margin-bottom: 5px;
         }
         input {
+            width: 100%;
+            font-size: 14px;
             box-sizing: border-box;
         }
     }
@@ -144,6 +146,26 @@
     cursor: pointer;
 }    
 
+
+@media (max-width: 768px) {
+    .calendar-content-container {
+        flex-direction: column;
+        gap: 0px;
+        .main-calendar-container {
+            h1 {
+                display: none;
+            }
+        }
+        .event-form-container {
+            h1 {
+                margin: 15px;
+            }
+            .form-container {
+                margin: 5px;
+            }
+        }
+    }
+}
 
 @media (prefers-color-scheme: dark) {
     .red-day {

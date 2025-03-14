@@ -24,6 +24,8 @@
         }
         input {
             box-sizing: border-box;
+            width: 100%;
+            font-size: 14px;
         }
     }
     .main-calendar-container {
@@ -35,7 +37,7 @@
         flex-direction: row;
         align-items: center;
         justify-content: start;
-        margin-top: 25px;
+        margin-top: -5px;
         margin-bottom: 25px;
     }
     .event-color-container {
@@ -49,6 +51,7 @@
             align-items: center;
             justify-content: start;
             margin-right: 15px;
+            margin-bottom: 0px;
         }
         input {
             margin-right: 5px;
@@ -143,6 +146,27 @@
     background-color: yellow;
     cursor: pointer;
 }    
+
+@media (max-width: 768px) {
+    .calendar-content-container {
+        flex-direction: column;
+        gap: 0px;
+        .main-calendar-container {
+            h1 {
+                display: none;
+            }
+        }
+        .event-form-container {
+            h1 {
+                margin: 15px;
+            }
+            .form-container {
+                margin: 5px;
+            }
+        }
+    }
+}
+
 
 
 @media (prefers-color-scheme: dark) {

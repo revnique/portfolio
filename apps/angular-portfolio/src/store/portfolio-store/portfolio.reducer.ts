@@ -49,21 +49,21 @@ export const portfolioReducer = createReducer(
         let redDays = action.events.filter(event => event.eventColor === 'red').map(event => {
             const evt = JSON.parse(JSON.stringify(event));
             const dt = new Date(evt.eventDate);
-            const eventDate = `${dt.getMonth() + 1}/${dt.getDate()}/${dt.getFullYear()}`;
+            const eventDate = `${dt.getMonth() + 1}/${dt.getDate()+1}/${dt.getFullYear()}`;
             evt.eventDate = eventDate;
             return evt;
         });
         let orangeDays = action.events.filter(event => event.eventColor === 'orange').map(event => {
             const evt = JSON.parse(JSON.stringify(event));
             const dt = new Date(evt.eventDate);
-            const eventDate = `${dt.getMonth() + 1}/${dt.getDate()}/${dt.getFullYear()}`;
+            const eventDate = `${dt.getMonth() + 1}/${dt.getDate()+1}/${dt.getFullYear()}`;
             evt.eventDate = eventDate;
             return evt;
         });
         let yellowDays = action.events.filter(event => event.eventColor === 'yellow').map(event => {
             const evt = JSON.parse(JSON.stringify(event));
             const dt = new Date(evt.eventDate);
-            const eventDate = `${dt.getMonth() + 1}/${dt.getDate()}/${dt.getFullYear()}`;
+            const eventDate = `${dt.getMonth() + 1}/${dt.getDate()+1}/${dt.getFullYear()}`;
             evt.eventDate = eventDate;
             return evt;
         });

@@ -71,22 +71,22 @@ const portfolioReducer = (state = initialPortfolioState, action:any) => {
                 isPending: true
             };
         case LoadCalendarEventsSuccess:
-            console.log('LoadCalendarEventsSuccess', action.events);
-            let redDays = action.events.filter((event: CalendarEvent) => event.eventColor === 'red').map((event: CalendarEvent) => {
+            console.log('LoadCalendarEventsSuccess', action.payload);
+            let redDays = action.payload.filter((event: CalendarEvent) => event.eventColor === 'red').map((event: CalendarEvent) => {
                 const evt = JSON.parse(JSON.stringify(event));
                 const dt = new Date(evt.eventDate);
                 const eventDate = `${dt.getMonth() + 1}/${dt.getDate()}/${dt.getFullYear()}`;
                 evt.eventDate = eventDate;
                 return evt;
             });
-            let orangeDays = action.events.filter((event: CalendarEvent) => event.eventColor === 'orange').map((event: CalendarEvent) => {
+            let orangeDays = action.payload.filter((event: CalendarEvent) => event.eventColor === 'orange').map((event: CalendarEvent) => {
                 const evt = JSON.parse(JSON.stringify(event));
                 const dt = new Date(evt.eventDate);
                 const eventDate = `${dt.getMonth() + 1}/${dt.getDate()}/${dt.getFullYear()}`;
                 evt.eventDate = eventDate;
                 return evt;
             });
-            let yellowDays = action.events.filter((event: CalendarEvent) => event.eventColor === 'yellow').map((event: CalendarEvent) => {
+            let yellowDays = action.payload.filter((event: CalendarEvent) => event.eventColor === 'yellow').map((event: CalendarEvent) => {
                 const evt = JSON.parse(JSON.stringify(event));
                 const dt = new Date(evt.eventDate);
                 const eventDate = `${dt.getMonth() + 1}/${dt.getDate()}/${dt.getFullYear()}`;

@@ -104,6 +104,7 @@ export class RevniqueCalendarComponent implements OnChanges {
         isToday: todayDt === dt,
         calendarEvent: undefined
       }
+      console.log("day", day);
       this.calInfo.dayList.push(day);
       paddingDayCount -= 1;
       paddingDayNumber +=1;

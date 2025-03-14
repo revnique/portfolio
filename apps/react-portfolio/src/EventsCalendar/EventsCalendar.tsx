@@ -5,7 +5,7 @@ import { faCaretUp, faCaretDown, faTrash } from '@fortawesome/free-solid-svg-ico
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useEffect } from 'react';
 import RevniqueCalendar from '../RevniqueCalendar/RevniqueCalendar';
-import { loadCalendarEvents } from '../store/PortfolioStore/portfolio.actions';
+import { addCalendarEvent, loadCalendarEvents } from '../store/PortfolioStore/portfolio.actions';
 export const EventsCalendar = () => {
     const state = useSelector((state:any) => state.portfolioReducer as PortfolioState);
     const [showSummary, setShowSummary] = useState(false);
@@ -17,8 +17,19 @@ export const EventsCalendar = () => {
         console.log('deleteEvent', event);
     }
     const saveEvent = () => {
-        console.log('saveEvent');
+        if (eventTitle === '' || eventDate === '' || eventColor === '') {
+            return;
+        }
+        const event: CalendarEvent = {
+            title: eventTitle,
+            eventDate: eventDate,
+            eventColor: eventColor
+        }
+        dispatch(addCalendarEvent(event));
     }
+    const [eventTitle, setEventTitle] = useState('');
+    const [eventDate, setEventDate] = useState('');
+    const [eventColor, setEventColor] = useState('');
     useEffect(() => {
         dispatch(loadCalendarEvents());
     }, []);
@@ -29,7 +40,7 @@ export const EventsCalendar = () => {
                     <h1>Events Calendar</h1>
                     <div className="summary-subheader">(add events to calendar) <span className="summary-subheader-link" onClick={toggleSummary}><FontAwesomeIcon icon={showSummary ? faCaretUp : faCaretDown} /></span></div>
                     <div className={`summary-text ${showSummary ? 'show' : 'hide'}`}>
-                        This page allows you to add events to the calendar. You can add events by clicking the "Add Event" button.
+                        This page allows you to add events to the calendar. You can add events by clicking the "Save" button.
                     </div>
                 </div>
             </div>
@@ -65,27 +76,27 @@ export const EventsCalendar = () => {
                         <form className="form-container">
                             <div className="form-group">
                                 <label htmlFor="title">Event Name</label>
-                                <input type="text" className="form-field" name="title" maxLength={50} />
+                                <input type="text" className="form-field" name="title" maxLength={50} onChange={(e) => setEventTitle(e.target.value)} />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="eventDate">Date</label>
-                                <input type="date" className="form-field" name="eventDate" />
+                                <input type="date" className="form-field" name="eventDate" onChange={(e) => setEventDate(e.target.value)} />
                             </div>
                             <div className="event-color-radiocontainer">
                                 <div className="event-color-container">
-                                    <input type="radio" name="eventColor" id="red" value="red" />
+                                    <input type="radio" name="eventColor" id="red" value="red" onChange={(e) => setEventColor(e.target.value)} />
                                     <label htmlFor="red">
                                         <span className="event-color-text">Red</span><span className="event-color-square red-day">&nbsp;&nbsp;&nbsp;</span>
                                     </label>
                                 </div>
                                 <div className="event-color-container">
-                                    <input type="radio" name="eventColor" id="orange" value="orange" />
+                                    <input type="radio" name="eventColor" id="orange" value="orange" onChange={(e) => setEventColor(e.target.value)} />
                                     <label htmlFor="orange">
                                         <span className="event-color-text">Orange</span><span className="event-color-square orange-day">&nbsp;&nbsp;&nbsp;</span>
                                     </label>
                                 </div>
                                 <div className="event-color-container">
-                                    <input type="radio" name="eventColor" id="yellow" value="yellow" />
+                                    <input type="radio" name="eventColor" id="yellow" value="yellow" onChange={(e) => setEventColor(e.target.value)} />
                                     <label htmlFor="yellow">
                                         <span className="event-color-text">Yellow</span><span className="event-color-square yellow-day">&nbsp;&nbsp;&nbsp;</span>
                                     </label>
@@ -93,6 +104,7 @@ export const EventsCalendar = () => {
                             </div>
                             <div className="button-container">
                                 <button type="button" onClick={saveEvent}>Save</button>
+                                <span className={`error-message ${eventTitle === '' || eventDate === '' || eventColor === '' ? 'show' : 'hide'}`}>Please fill out all fields</span>
                             </div>
                         </form>
                     </div>

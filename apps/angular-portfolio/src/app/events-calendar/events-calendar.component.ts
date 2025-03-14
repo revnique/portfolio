@@ -34,7 +34,9 @@ export class EventsCalendarComponent implements OnInit{
   }
 
   save(){
-    console.log("asdf",this.eventForm.get('eventDate')?.value!);
+    if (this.eventForm.invalid) {
+      return;
+    }
     this.store.dispatch(PortfolioActions.addCalendarEvent({
       event: {
         id: '',

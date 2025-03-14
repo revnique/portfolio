@@ -3,7 +3,7 @@
         <h1>Events Calendar</h1>
         <div class="summary-subheader">(add events to calendar) <span class="summary-subheader-link" (click)="toggleSummary()"><fa-icon *ngIf="showSummary" [icon]="faCaretUp"></fa-icon><fa-icon *ngIf="!showSummary" [icon]="faCaretDown"></fa-icon></span></div>
         <div class="summary-text" [ngClass]="{'show': showSummary,'hide': !showSummary}">
-            This page allows you to add events to the calendar. You can add events by clicking the "Add Event" button.
+            This page allows you to add events to the calendar. You can add events by clicking the "Save" button.
         </div>
     </div>
 </div>
@@ -67,6 +67,7 @@
                 </div>
                 <div class="button-container">
                     <button type="button" (click)="save()">Save</button>
+                    <span class="error-message" [ngClass]="{'show': eventForm.invalid, 'hide': eventForm.valid}">Please fill out all fields</span>
                 </div>
             </form>
         </div>

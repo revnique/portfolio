@@ -24,7 +24,7 @@ export interface PortfolioState {
 }
 
 export interface CalendarEvent {
-    id: string;
+    id?: string;
     title: string;
     eventDate: string;
     eventColor: string;
