@@ -1,4 +1,4 @@
-.main-content-body {
+.main-content-body.events-calendar {
     padding: 25px;
 }
 .calendar-content-container {
@@ -166,8 +166,10 @@
         background-color: transparent;
     }
 
-    .form-container {
-        background-color: transparent !important;
+    .event-form-container {
+        .form-container {
+            background-color: transparent !important;
+        }
     }
 
     .selected-event-container {
