@@ -18,7 +18,9 @@
             <ng-container *ngFor="let day of calInfo.dayList; let _i = index">
                 <div class="calendar-cell" [ngClass]="{'padding-day':day.isPaddingDay}" (click)="selectDay(day)"
                     attr.aria-label="{{day.fullDt}}" attr.aria-date="{{day.dt}}">
-                    <span class="day-number" [ngClass]="{'red-day':day.showRed, 'today-day':day.isToday, 'orange-day':day.showOrange, 'yellow-day':day.showYellow}">{{day.dayNumber}}</span>
+                    <span class="day-number" [ngClass]="{'red-day':day.showRed, 'today-day':day.isToday, 'orange-day':day.showOrange, 'yellow-day':day.showYellow}">
+                        <span *ngIf="day.dayNumber < 10" class="hidden">0</span>{{day.dayNumber}}
+                    </span>
                 </div>
             </ng-container>
         </div>

@@ -165,7 +165,9 @@ const RevniqueCalendar: React.FC<RevniqueCalendarProps> = ({ redDays, yellowDays
                 {calInfoState.dayList.map((day, index) => (
                     <div onClick={() => selectDay(day)} className={`calendar-cell ${day.isPaddingDay ? 'padding-day' : ''}`} key={index}
                         aria-label={day.fullDt} data-date={day.dt}>
-                        <span className={`day-number ${day.showRed ? 'red-day' : ''} ${day.isToday ? 'today-day' : ''} ${day.showOrange ? 'orange-day' : ''} ${day.showYellow ? 'yellow-day' : ''}`}>{day.dayNumber}</span>
+                        <span className={`day-number ${day.showRed ? 'red-day' : ''} ${day.isToday ? 'today-day' : ''} ${day.showOrange ? 'orange-day' : ''} ${day.showYellow ? 'yellow-day' : ''}`}>
+                            {day.dayNumber < 10 ? (<><span className="hidden">0</span>{day.dayNumber}</>) : day.dayNumber}
+                        </span>
                     </div>
                 ))}
             </div>

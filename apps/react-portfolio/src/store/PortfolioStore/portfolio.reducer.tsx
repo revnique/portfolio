@@ -75,21 +75,21 @@ const portfolioReducer = (state = initialPortfolioState, action:any) => {
             let redDays = action.payload.filter((event: CalendarEvent) => event.eventColor === 'red').map((event: CalendarEvent) => {
                 const evt = JSON.parse(JSON.stringify(event));
                 const dt = new Date(evt.eventDate);
-                const eventDate = `${dt.getMonth() + 1}/${dt.getDate()}/${dt.getFullYear()}`;
+                const eventDate = `${dt.getMonth() + 1}/${dt.getDate()+1}/${dt.getFullYear()}`;
                 evt.eventDate = eventDate;
                 return evt;
             });
             let orangeDays = action.payload.filter((event: CalendarEvent) => event.eventColor === 'orange').map((event: CalendarEvent) => {
                 const evt = JSON.parse(JSON.stringify(event));
                 const dt = new Date(evt.eventDate);
-                const eventDate = `${dt.getMonth() + 1}/${dt.getDate()}/${dt.getFullYear()}`;
+                const eventDate = `${dt.getMonth() + 1}/${dt.getDate()+1}/${dt.getFullYear()}`;
                 evt.eventDate = eventDate;
                 return evt;
             });
             let yellowDays = action.payload.filter((event: CalendarEvent) => event.eventColor === 'yellow').map((event: CalendarEvent) => {
                 const evt = JSON.parse(JSON.stringify(event));
                 const dt = new Date(evt.eventDate);
-                const eventDate = `${dt.getMonth() + 1}/${dt.getDate()}/${dt.getFullYear()}`;
+                const eventDate = `${dt.getMonth() + 1}/${dt.getDate()+1}/${dt.getFullYear()}`;
                 evt.eventDate = eventDate;
                 return evt;
             });

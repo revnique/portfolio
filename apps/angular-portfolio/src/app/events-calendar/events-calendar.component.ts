@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RevniqueCalendarComponent } from '../revnique-calendar/revnique-calendar.component';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { faCaretUp, faCaretDown, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Store } from '@ngrx/store';
@@ -23,9 +23,9 @@ export class EventsCalendarComponent implements OnInit{
   faCaretDown = faCaretDown;
   faTrash = faTrash;
   eventForm = new FormGroup({
-    title: new FormControl(''),
-    eventDate: new FormControl(''),
-    eventColor: new FormControl('red')
+    title: new FormControl('', Validators.required),
+    eventDate: new FormControl('', Validators.required),
+    eventColor: new FormControl('red', Validators.required)
   });
   eventColor = ['red', 'orange', 'yellow'];
 
