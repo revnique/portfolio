@@ -26,6 +26,9 @@ export const EventsCalendar = () => {
             eventColor: eventColor
         }
         dispatch(addCalendarEvent(event));
+        setEventTitle('');
+        setEventDate('');
+        setEventColor('');
     }
     const [eventTitle, setEventTitle] = useState('');
     const [eventDate, setEventDate] = useState('');

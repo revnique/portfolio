@@ -171,6 +171,10 @@
 
 
 @media (max-width: 768px) {
+    .main-content-body {
+        padding: 0px;
+    }
+
     .calendar-content-container {
         flex-direction: column;
         gap: 0px;
@@ -181,7 +185,8 @@
         }
         .event-form-container {
             h1 {
-                margin: 15px;
+                margin: 25px 15px 15px 15px;
+                font-size: 25px;
             }
             .form-container {
                 margin: 5px;
