@@ -68,7 +68,7 @@ export default function ComponentsPage() {
                             </div>
                         </div>
                     </div>
-                    <div className="section">
+                    <div className="section calendar-section">
                         <h2>Calendar</h2>
                         <div className="calendar-container">
                             <RevniqueCalendar redDays={redDays} yellowDays={yellowDays} orangeDays={orangeDays} />

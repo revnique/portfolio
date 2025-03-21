@@ -12,7 +12,7 @@ import { CalendarEvent } from '../../store/portfolio-store/portfolio.state';
 export class ComponentsPageComponent {
   valueBarPositiveHeight = 70;
   valueBarNegativeHeight = 30;
-  redDays: CalendarEvent[] = ['3/3/2025','3/8/2025','6/28/2025','6/29/2025','5/17/2025','5/28/2025','7/27/2025','7/11/2025'].map(d=>{
+  redDays: CalendarEvent[] = ['3/3/2025','3/7/2025','6/28/2025','6/29/2025','5/17/2025','5/28/2025','7/27/2025','7/11/2025'].map(d=>{
     return {
       eventDate: d,
       title: 'Red Day',
