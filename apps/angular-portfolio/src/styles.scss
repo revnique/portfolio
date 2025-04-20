@@ -12,7 +12,7 @@ html, body, #root {
 body {
   color: var(--foreground);
   background: var(--background);
-  margin: 0; 
+  margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
@@ -87,4 +87,12 @@ body {
       background-color: #444;
     }
   }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  /* Adjust layout for landscape */
+}
+
+@media (max-width: 768px) and (orientation: portrait) {
+  /* Adjust layout for portrait */
 }
