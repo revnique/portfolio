@@ -1,5 +1,4 @@
 # Console.log Report
-### using https://github.com/jbchouinard/mcp-document-reader
 
 ## Summary
 Found **48 console.log statements** across **15 files** in the portfolio codebase.
@@ -534,3 +533,7 @@ export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
 4. Clean up commented-out console.logs
 5. Consider using a logger service that can be configured per environment
 
+# MCP Servers
+
+### using https://github.com/jbchouinard/mcp-document-reader
+### https://github.com/eyalzh/browser-control-mcp?tab=readme-ov-file#installation
